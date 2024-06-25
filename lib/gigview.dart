@@ -1,6 +1,6 @@
 import 'gigbox.dart';
 import 'package:flutter/material.dart';
-import 'contractview.dart';
+import 'viewcontractspage.dart';
 
 void main() {
   runApp(const GigView());
@@ -36,7 +36,7 @@ class _GigViewState extends State<GigView> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const ContractView(contracts: [])));
+                              const ViewContractsPage(contracts: [])));
                 }
               },
             )

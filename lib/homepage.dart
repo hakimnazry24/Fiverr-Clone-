@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/contractform.dart';
-import 'package:flutter_app/contractview.dart';
+import 'package:flutter_app/viewservicespage.dart';
+import 'package:flutter_app/viewcontractspage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -17,18 +17,18 @@ class _HomePageState extends State<HomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Second Screen'),
+            title: const Text('Fiverr'),
             bottom: const TabBar(tabs: [
-              Tab(text: 'CREATE'),
-              Tab(text: 'VIEW'),
+              Tab(text: 'Available services'),
+              Tab(text: 'Contracts'),
             ]),
           ),
           body: const TabBarView(
             children: [
               //TAB 1
-              ContractForm(),
+              ViewServicesPage(),
               //TAB 2
-              ContractView(contracts: [])
+              ViewContractsPage(contracts: []),
             ],
           )),
     );

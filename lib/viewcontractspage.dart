@@ -4,16 +4,16 @@ import 'contract.dart';
 import 'gigview.dart';
 import 'contractbox.dart'; // Ensure this import is needed and used correctly
 
-class ContractView extends StatefulWidget {
+class ViewContractsPage extends StatefulWidget {
   final List<Contract> contracts;
 
-  const ContractView({Key? key, required this.contracts}) : super(key: key);
+  const ViewContractsPage({Key? key, required this.contracts}) : super(key: key);
 
   @override
-  _ContractViewState createState() => _ContractViewState();
+  _ViewContractsPageState createState() => _ViewContractsPageState();
 }
 
-class _ContractViewState extends State<ContractView> {
+class _ViewContractsPageState extends State<ViewContractsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

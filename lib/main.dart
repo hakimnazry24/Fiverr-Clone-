@@ -25,8 +25,7 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
-            brightness: Brightness.light,
+            seedColor: Color.fromARGB(255, 223, 255, 223),
           ),
           textTheme: TextTheme(
             displayLarge: const TextStyle(
