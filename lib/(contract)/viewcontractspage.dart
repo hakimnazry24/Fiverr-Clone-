@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/contract_card.dart';
-import 'contract.dart';
-import 'gigview.dart';
-import 'contractbox.dart'; // Ensure this import is needed and used correctly
+import 'package:flutter_app/(contract)/contract_card.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
 // class ViewContractsPage extends StatefulWidget {
@@ -89,7 +86,10 @@ class _ViewContractsPageState extends State<ViewContractsPage> {
     }();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(
+          height: 10,
+        ),
         itemCount: contracts.length,
         padding: EdgeInsets.all(10),
         itemBuilder: (context, index) {

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/service_card.dart';
+import 'package:flutter_app/(gig)/service_card.dart';
 import 'package:intl/intl.dart';
-import 'contract.dart';
-import 'viewcontractspage.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
 class ViewServicesPage extends StatefulWidget {
@@ -31,7 +29,8 @@ class _ViewServicesPageState extends State<ViewServicesPage> {
     return Scaffold(
       // body: Text(services[0].data().toString()),
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: ListView.builder(
+      body: ListView.separated(
+        separatorBuilder: (context, index) => SizedBox(height: 10,),
           padding: EdgeInsets.all(10),
           itemCount: services.length,
           itemBuilder: (BuildContext context, index) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/viewservicespage.dart';
-import 'package:flutter_app/viewcontractspage.dart';
+import 'package:flutter_app/(gig)/viewservicespage.dart';
+import 'package:flutter_app/(contract)/viewcontractspage.dart';
 
 
 class HomePage extends StatefulWidget {
