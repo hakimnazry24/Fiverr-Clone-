@@ -30,7 +30,8 @@ class _WelcomePageState extends State<WelcomePage> {
               height: 20,
             ),
             SizedBox(
-              child: Row(
+              child: Row( 
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // button for login as client
                   ElevatedButton(

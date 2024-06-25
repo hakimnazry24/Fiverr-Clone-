@@ -1,41 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'contract.dart';
-import 'contractview.dart';
 
-void main() {
-  runApp(const ContractForm());
-}
-
-class ContractForm extends StatelessWidget {
+class ContractForm extends StatefulWidget {
   const ContractForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-      ),
-      home: const ContractPage(),
-    );
-  }
+  State<ContractForm> createState() => _ContractFormState();
 }
 
-class ContractPage extends StatefulWidget {
-  const ContractPage({Key? key}) : super(key: key);
-
-  @override
-  _ContractPageState createState() => _ContractPageState();
-}
-
-class _ContractPageState extends State<ContractPage> {
+class _ContractFormState extends State<ContractForm> {
   final _formKey = GlobalKey<FormState>();
   final _dateController = TextEditingController();
-  final _contractIdController = TextEditingController();
-  final _lookingForController = TextEditingController();
+  final _timeController = TextEditingController();
   final _offerController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _additionalnoteController = TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -51,186 +30,180 @@ class _ContractPageState extends State<ContractPage> {
     }
   }
 
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+    if (picked != null) {
+      setState(() {
+        _timeController.text = picked.format(context);
+      });
+    }
+  }
+
   @override
   void dispose() {
     _dateController.dispose();
-    _contractIdController.dispose();
-    _lookingForController.dispose();
+    _timeController.dispose();
     _offerController.dispose();
-    _descriptionController.dispose();
+    _additionalnoteController.dispose();
     super.dispose();
-  }
-
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      final contract = Contract(
-        id: _contractIdController.text,
-        lookingFor: _lookingForController.text,
-        offer: double.parse(_offerController.text),
-        dueDate: _dateController.text,
-        description: _descriptionController.text,
-      );
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ContractView(contracts: [contract]),
-        ),
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Client Page'),
+        title: const Text('Create Contract'),
         centerTitle: true,
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
-              child: ListView(
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: TextFormField(
-                      controller: _contractIdController,
-                      decoration: const InputDecoration(
-                        labelText: 'Contract ID',
-                        hintText: 'Enter Contract ID',
-                        border: InputBorder.none,
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a Contract ID';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: TextFormField(
-                      controller: _lookingForController,
-                      decoration: const InputDecoration(
-                        labelText: 'Looking For',
-                        hintText: 'Enter what job you are looking for',
-                        border: InputBorder.none,
-                      ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter what job you are looking for';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    padding: const EdgeInsets.all(3.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            controller: _offerController,
-                            decoration: const InputDecoration(
-                              labelText: 'Offer',
-                              hintText: 'RM',
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                            ),
-                            keyboardType: TextInputType.number,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter an offer amount';
-                              }
-                              return null;
-                            },
+      body: Container( 
+        decoration: BoxDecoration(color: Color.fromRGBO(208, 249, 224, 1.0)),
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: ListView(
+            children: <Widget>[
+             Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color.fromRGBO(113, 111, 111, 1), Color.fromRGBO(113, 111, 111, 1)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+            children: <Widget>[
+              Text('Laundry - From Washing until Drying',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              Text('by: Hakim Nazry'),
+              Text('RM 10.00 - RM 20.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+              Text( 'Description: I will wash your clothes and dry them. I will also iron them if you want me to.')
+            ],
+          ),),
+             ),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _dateController,
+                        decoration: const InputDecoration(
+                          labelText: 'Due Date',
+                          hintText: 'Enter the due date',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
                           ),
-                        ),
-                        const SizedBox(width: 16.0),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => _selectDate(context),
-                            child: AbsorbPointer(
-                              child: TextFormField(
-                                controller: _dateController,
-                                decoration: const InputDecoration(
-                                  labelText: 'Due Date',
-                                  hintText: 'Select a date',
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.grey),
-                                  ),
-                                ),
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please select a due date';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
                           ),
+                          filled: true,
+                          fillColor: Colors.white
                         ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(bottom: 16.0),
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    child: TextFormField(
-                      controller: _descriptionController,
-                      decoration: const InputDecoration(
-                        labelText: 'Description',
-                        hintText: 'Description about the job',
-                        border: InputBorder.none,
+                        onTap: () => _selectDate(context),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the due date';
+                          }
+                          return null;
+                        },
                       ),
-                      maxLines: 4,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter a description';
-                        }
-                        return null;
-                      },
                     ),
-                  ),
-                ],
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _timeController,
+                        decoration: const InputDecoration(
+                          labelText: 'Time',
+                          hintText: 'Enter the time',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
+                          ),
+                          filled: true,
+                          fillColor: Colors.white
+                        ),
+                        onTap: () => _selectTime(context),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the time';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _offerController,
+                        decoration: const InputDecoration(
+                          labelText: 'Offer',
+                          hintText: 'RM',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
+                          ),
+                          filled: true,
+                          fillColor: Colors.white
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the offer amount';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _additionalnoteController,
+                        decoration: const InputDecoration(
+                          labelText: 'Additional Note',
+                          hintText: 'Enter additional notes',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
+                          ),
+                          filled: true,
+                          fillColor: Colors.white
+                        ),
+                        maxLines: 3,
+                      ),
+                    ),
+        
+                  ],
+                ),
+              ),
+              Positioned(
+              bottom: 16,
+              right: 16,
+              child: FloatingActionButton(
+                onPressed: (){},
+                backgroundColor: Color.fromRGBO(111, 250, 167, 1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: const Text('Create contract', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
               ),
             ),
+            ],
           ),
-          Positioned(
-            bottom: 16,
-            right: 16,
-            child: FloatingActionButton(
-              onPressed: _submitForm,
-              backgroundColor: Colors.green,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: const Icon(Icons.add, color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+        ),
+      ),);
+      
+  }}
