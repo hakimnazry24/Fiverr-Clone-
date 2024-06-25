@@ -23,12 +23,14 @@ class _HomePageState extends State<HomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
               //TAB 1
               ViewServicesPage(),
               //TAB 2
-              ViewContractsPage(contracts: []),
+              ViewContractsPage(
+                // contracts: []
+                ),
             ],
           )),
     );

@@ -36,7 +36,9 @@ class _GigViewState extends State<GigView> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const ViewContractsPage(contracts: [])));
+                              ViewContractsPage(
+                                // contracts: []
+                                )));
                 }
               },
             )
