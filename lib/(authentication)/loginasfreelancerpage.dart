@@ -1,21 +1,22 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_app/createaccountpage.dart";
-import "homepage.dart";
+import "package:flutter_app/(authentication)/createaccountpage.dart";
+import "../homepage.dart";
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginAsFreelancerPage extends StatefulWidget {
+  const LoginAsFreelancerPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginAsFreelancerPage> createState() => _LoginAsFreelancerPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   bool validAccount = false;
 
   bool loginAccount(String username, String password) {
+    // mock username and password
     String _username = "John";
     String _password = "Doe";
 
@@ -36,6 +37,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        // background decoration
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -81,11 +83,12 @@ class _LoginPageState extends State<LoginPage> {
                 height: 5,
               ),
               ElevatedButton(
+                // redirect user to home page when authentication is successful
                   onPressed: () {
                     validAccount = loginAccount(
                         usernameController.text, passwordController.text);
                     if (validAccount) {
-                      Navigator.push(context,
+                      Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => HomePage()));
                     } else {
                       showDialog(
@@ -101,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // redirect user to create new account
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -109,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                                 builder: (context) => CreateAccountPage()));
                       },
                       child: const Text(
-                        "Do not have account yet?",
+                        "Do not have account as a freelancer yet?",
                         style: TextStyle(
                             fontSize: 12, decoration: TextDecoration.underline),
                       ),

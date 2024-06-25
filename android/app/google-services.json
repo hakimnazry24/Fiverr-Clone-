@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "249509612490",
+    "project_id": "fiverr-b12a9",
+    "storage_bucket": "fiverr-b12a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249509612490:android:415bf03a8ebc92b014dd33",
+        "android_client_info": {
+          "package_name": "com.example.flutter_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSMshhpr2KNRVW2ws4bMl2dOot3yvXhEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
