@@ -49,7 +49,7 @@ The main goal of this project is to create a comprehensive and user-centric plat
 
 ## Sequence Diagram
 
-  picture....
+![sequence diagram](FiverApp.drawio.png)
 
 ## References
 
