@@ -1,7 +1,8 @@
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_app/(authentication)/createclientaccountpage.dart";
 import "package:flutter_app/(authentication)/createfreelanceraccountpage.dart";
+import "package:flutter_app/firebase/firebase_auth.dart";
 import "../homepage.dart";
 
 class LoginAsFreelancerPage extends StatefulWidget {
@@ -14,24 +15,21 @@ class LoginAsFreelancerPage extends StatefulWidget {
 class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
-  bool validAccount = false;
+  // bool validAccount = false;
 
-  bool loginAccount(String username, String password) {
-    // mock username and password
-    String _username = "John";
-    String _password = "Doe";
-
-    if (_username == username && _password == password) {
-      setState(() {
-        validAccount = true;
-      });
-    } else {
-      setState(() {
-        validAccount = false;
-      });
+  Future<UserCredential> loginAccount(String email, String password) async {
+    try {
+      final credential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credential;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      rethrow;
     }
-
-    return validAccount;
   }
 
   @override
@@ -55,7 +53,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Login",
+                "Login As Freelancer",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -85,17 +83,15 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
               ),
               ElevatedButton(
                   // redirect user to home page when authentication is successful
-                  onPressed: () {
-                    validAccount = loginAccount(
-                        usernameController.text, passwordController.text);
-                    if (validAccount) {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
-                    } else {
+                  onPressed: () async {
+                    try {
+                      var credential = await loginAccount(
+                          usernameController.text, passwordController.text);
+                    } catch (e) {
                       showDialog(
                           context: context,
-                          builder: (context) => const AlertDialog(
-                                content: Text("Wrong username and password"),
+                          builder: (_) => AlertDialog(
+                                content: Text("Wrong password and username"),
                               ));
                     }
                   },
