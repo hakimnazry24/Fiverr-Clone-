@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/(contract)/createcontractpage.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
+import 'package:flutter/services.dart';
 
 class ContractCard extends StatelessWidget {
   var data; // data from gig collection
@@ -9,6 +10,13 @@ class ContractCard extends StatelessWidget {
     super.key,
     required this.data,
   });
+
+  void _copyToClipboard(BuildContext context, String text) {
+    Clipboard.setData(ClipboardData(text: text));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Contract ID copied to clipboard')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,10 +92,20 @@ class ContractCard extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
 
-              Text(
-                'Freelancer contact: ${data.data()["freelancer_contact"]}',
-                style: const TextStyle(fontSize: 13, height: 1.5),
-                textAlign: TextAlign.justify,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      'Freelancer contact: ${data.data()["freelancer_contact"]}',
+                      style: const TextStyle(fontSize: 13, height: 1.5),
+                      textAlign: TextAlign.justify,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.copy),
+                    onPressed: () => _copyToClipboard(context, data.data()["freelancer_contact"]),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 10,

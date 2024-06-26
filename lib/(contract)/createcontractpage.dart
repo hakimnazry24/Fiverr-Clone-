@@ -253,7 +253,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
                           });
                           Navigator.pop(context);
                           showDialog(context: context, 
-                          builder: (_)=> const AlertDialog(content: Text('Done Create contact'),));
+                          builder: (_)=> const SnackBar(content: Text('Done Create contact'),));
                         },
                         child: const Text("Create contract"))
                   ],
