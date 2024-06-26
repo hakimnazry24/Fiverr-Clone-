@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_app/(gig)/service_card.dart';
+import 'package:flutter_app/(contract)/viewcontractspage.dart';
 import 'package:intl/intl.dart';
 
-class ContractForm extends StatefulWidget {
-  const ContractForm({Key? key}) : super(key: key);
+class CreateContractPage extends StatefulWidget {
+  var data;
+  
+  CreateContractPage({super.key, required this.data});
 
   @override
-  State<ContractForm> createState() => _ContractFormState();
+  State<CreateContractPage> createState() => _CreateContractPageState();
 }
 
-class _ContractFormState extends State<ContractForm> {
-  final _formKey = GlobalKey<FormState>();
+class _CreateContractPageState extends State<CreateContractPage> {
+  Future<void> createContract() async {}
+   final _formKey = GlobalKey<FormState>();
   final _dateController = TextEditingController();
   final _timeController = TextEditingController();
   final _offerController = TextEditingController();
@@ -50,44 +54,34 @@ class _ContractFormState extends State<ContractForm> {
     _additionalnoteController.dispose();
     super.dispose();
   }
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Create Contract'),
-        centerTitle: true,
-      ),
-      body: Container( 
-        decoration: BoxDecoration(color: Color.fromRGBO(208, 249, 224, 1.0)),
-        child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: ListView(
-            children: <Widget>[
-             Container(
-                height: 200,
-                width: 200,
-                decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              colors: [Color.fromRGBO(113, 111, 111, 1), Color.fromRGBO(113, 111, 111, 1)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Column(
-            children: <Widget>[
-              Text('Laundry - From Washing until Drying',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              Text('by: Hakim Nazry'),
-              Text('RM 10.00 - RM 20.00', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-              Text( 'Description: I will wash your clothes and dry them. I will also iron them if you want me to.')
-            ],
-          ),),
-             ),
-              Form(
+      appBar: AppBar(),
+      body: ListView(children: [
+        Container(
+          padding: const EdgeInsets.all(30),
+
+          // width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                "Create contract",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              ServiceCard(
+                data: widget.data,
+                isForDisplay: true,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+                            Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
@@ -189,21 +183,35 @@ class _ContractFormState extends State<ContractForm> {
                   ],
                 ),
               ),
-              Positioned(
-              bottom: 16,
-              right: 16,
-              child: FloatingActionButton(
-                onPressed: (){},
-                backgroundColor: Color.fromRGBO(111, 250, 167, 1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
+              SizedBox(
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            await createContract();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => ViewContractsPage()));
+                          } catch (e) {
+                            showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                      content: Text("Something is wrong"),
+                                    ));
+                          }
+                        },
+                        child: Text("Create contract"))
+                  ],
                 ),
-                child: const Text('Create contract', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)
-              ),
-            ),
+              )
             ],
           ),
         ),
-      ),);
-      
-  }}
+      ]),
+    );
+  }
+}

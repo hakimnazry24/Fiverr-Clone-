@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/(contract)/createcontract.dart';
+import 'package:flutter_app/(contract)/createcontractpage.dart';
 
 class ServiceCard extends StatelessWidget {
   var data;

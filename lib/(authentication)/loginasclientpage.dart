@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_app/(authentication)/createaccountpage.dart";
+import "package:flutter_app/(authentication)/createclientaccountpage.dart";
 import "../homepage.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
@@ -108,7 +108,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CreateAccountPage()));
+                                builder: (context) => CreateClientAccountPage()));
                       },
                       child: const Text(
                         "Do not have account as a client yet?",
