@@ -30,11 +30,26 @@ The main goal of this project is to create a comprehensive and user-centric plat
 5. **Login & Authentication** : This feature can determine who is the user, whether it is a client or freelancer; it will direct to a specific page for the client and freelancer.
 6. **Firebase Integrated** : This app is integrate with firebase firestorage to manage the database.
  
- 
-
 ## Screen Navigation and Widgets
+**Screen Navigation**
+1. Client: Login page -> Services Available -> Create Contract -> View Contract
+2. Freelancer: Login page -> Create Services page -> View Contract page -> Accept Contract
+
+**Widget Use**
+***Client***
+1. Services Available page: Contain widget like container and sizedbox that display the data of the services create by freelancer. It also has create contract button that will navigate page to create contract page.
+2. Create Contract page: Contain widget container that display details of the services. Then it has form widget that has validator for each input. The input are client name, client phone no, due date, time, offer, and additional notes. The due date and time input use plugin date and time picker install in flutter. It also has button that will create contract once it has validate. The data will be push to firebase firestorage.
+3. View Contract Page: This is the page where client can view their contract they have make and can know the status of the contract. It contain widget like container and sizebox to display the detail of the contract with service along with the status, then it also contain icon copy button for freelancer to copy the freelancer phone no to contact them.
+
+***Freelancer***
+1. Create Services Page: Contain widget like form widget that can get input from the user to create services. Has validator with controller input that can get the input and pass it to firebase storage once button is press and form is validate.
+2. Accept Offer Page: Contain similar widget like view contract page in client page, but has additional widget like button to accept or decline the contract offer. The widget is connected to firebase firestorage like the widget that display status.
+
+   picture....
 
 ## Sequence Diagram
+
+  picture....
 
 ## References
 
