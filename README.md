@@ -37,3 +37,10 @@ The main goal of this project is to create a comprehensive and user-centric plat
 ## Sequence Diagram
 
 ## References
+
+1. Flutter Official Documentation. Retrieved on 26 June 2024 from https://flutter.dev/docs
+2. Firebase Official Documentation. Retrieved on 26 June 2024 from https://firebase.google.com/docs/firestore/quickstart
+3. Pinkesh, D. (2020). A Deep Dive Into DatePicker In Flutter. Retrieved on 26 June 2024 from https://medium.com/flutter-community/a-deep-dive-into-datepicker-in-flutter-37e84f7d8d6c
+4. Fiver Website. Retrieved on 26 June 2024 from https://www.fiverr.com/
+
+
