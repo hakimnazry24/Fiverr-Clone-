@@ -49,7 +49,7 @@ Login Page
 ![Login Diagram](loginpage.png)
 
 Client Page
-![Client Diagram](clientpage.png)
+![Client Diagram](client page.png)
 
 Freelancer Page
 ![Freelancer Diagram](freelancerpage.png)
