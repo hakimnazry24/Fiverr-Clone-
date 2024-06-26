@@ -3,6 +3,14 @@
 2. MUHAMMAD HAKIM BIN MD NAZRI 2110457
 3. MUHAMMAD HARITH IRFAN BIN MUHAMAD SUHAILI 2211867
 
+# Instruction
+1. Git clone
+`git clone https://github.com/hakimnazry24/Fiverr-Clone-.git`
+2. Download dependancy
+`flutter pub get`
+3. Run Flutter app
+`flutter run`
+
 # Fiver App
 The Fiverr app is a widely-used platform that connects freelancers with clients seeking various services, from graphic design and digital marketing to writing and programming. The platform has revolutionized the gig economy by providing a streamlined and user-friendly interface for both service providers and clients. Our project aims to replicate the core functionalities of the Fiverr app, creating a robust and scalable platform that facilitates seamless interactions between freelancers and clients.
 
