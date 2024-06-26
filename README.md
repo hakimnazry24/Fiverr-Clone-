@@ -1,16 +1,20 @@
-# flutter_app
+1. Abdullah Alwafi bin Mohd Aminudin 2219713
+2. Hakim Nazry
+3. Harith
 
-A new Flutter project.
+# Fiver App
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+**Objective:**
 
-A few resources to get you started if this is your first Flutter project:
+**Main Goal:**
+.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features and Functionalities
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Screen Navigation and Widgets
+
+## Sequence Diagram
+
+## References
