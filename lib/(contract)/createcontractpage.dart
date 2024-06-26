@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/(gig)/service_card.dart';
 import 'package:flutter_app/(contract)/viewcontractspage.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_app/firebase/firebase_firestore.dart';
 
 class CreateContractPage extends StatefulWidget {
   var data;
@@ -21,6 +23,9 @@ class _CreateContractPageState extends State<CreateContractPage> {
   final _timeController = TextEditingController();
   final _offerController = TextEditingController();
   final _additionalnoteController = TextEditingController();
+  
+
+  
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -233,22 +238,24 @@ class _CreateContractPageState extends State<CreateContractPage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     ElevatedButton(
-                        onPressed: () async {
-                          try {
-                            await createContract();
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => ViewContractsPage()));
-                          } catch (e) {
-                            showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                      content: Text("Something is wrong"),
-                                    ));
-                          }
+                        onPressed: () {
+                          db.collection("Contract").add({
+                            'client_name': _clientNameController.text,
+                            'client_contact': _phonenumberclientController.text,
+                            'date': _dateController.text,
+                            'time': _timeController.text,
+                            'offer': _offerController.text,
+                            'note': _additionalnoteController.text,
+                            'freelancer_name': widget.data.data()["freelancer_name"],
+                            'freelancer_contact': widget.data.data()["freelancer_contact"],
+                            'service_name': widget.data.data()["service_name"],
+                            'status': 'pending'
+                          });
+                          Navigator.pop(context);
+                          showDialog(context: context, 
+                          builder: (_)=> const AlertDialog(content: Text('Done Create contact'),));
                         },
-                        child: Text("Create contract"))
+                        child: const Text("Create contract"))
                   ],
                 ),
               )
