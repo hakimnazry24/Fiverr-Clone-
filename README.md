@@ -1,7 +1,7 @@
 ***Group Sadge IIUM***
 1. ABDULLAH ALWAFI BIN MOHD AMINUDIN 2219713
 2. MUHAMMAD HAKIM BIN MD NAZRI 2110457
-3. Harith
+3. MUHAMMAD HARITH IRFAN BIN MUHAMAD SUHAILI 2211867
 
 # Fiver App
 The Fiverr app is a widely-used platform that connects freelancers with clients seeking various services, from graphic design and digital marketing to writing and programming. The platform has revolutionized the gig economy by providing a streamlined and user-friendly interface for both service providers and clients. Our project aims to replicate the core functionalities of the Fiverr app, creating a robust and scalable platform that facilitates seamless interactions between freelancers and clients.
@@ -23,7 +23,14 @@ The Fiverr app is a widely-used platform that connects freelancers with clients 
 The main goal of this project is to create a comprehensive and user-centric platform that replicates the core functionalities of the Fiverr app, with a focus on enabling users to offer services and clients to propose contracts. By incorporating secure authorization for both clients and users, along with essential features such as service listings and contract management we aim to provide a reliable and efficient marketplace for freelancers and clients to connect, collaborate, and conduct business.
 
 ## Features and Functionalities
-
+1. **Create Gig Features** : In the freelancer page, the user can create their services or gig; they can state what service they do, details of their job, price rate for their service, and their own details.
+2. **Create Contract** : In the client page, based on the services list by the freelancer, they can create a contract based on the services. The client can add their details, details of their job or task, offer for the job, and due date and time for the specific job.
+3. **View Contract** : On the client page, after they have created a contract, they can know the status of the contract, whether it is accepted by the freelancer, pending, or declined by the freelancer.
+4. **Accept Contract** : In the freelancer page, user can view the contract and choose to accept or decline the contract
+5. **Login & Authentication** : This feature can determine who is the user, whether it is a client or freelancer; it will direct to a specific page for the client and freelancer.
+6. **Firebase Integrated** : This app is integrate with firebase firestorage to manage the database.
+ 
+ 
 
 ## Screen Navigation and Widgets
 
