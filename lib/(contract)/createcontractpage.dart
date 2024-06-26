@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 
 class CreateContractPage extends StatefulWidget {
   var data;
-  
+
   CreateContractPage({super.key, required this.data});
 
   @override
@@ -56,9 +56,9 @@ class _CreateContractPageState extends State<CreateContractPage> {
     _additionalnoteController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(),
       body: ListView(children: [
@@ -83,7 +83,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
               const SizedBox(
                 height: 10,
               ),
-                            Form(
+              Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
@@ -92,24 +92,22 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _clientNameController,
                         decoration: const InputDecoration(
-                          labelText: 'Client Name',
-                          hintText: 'Enter client name',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Client Name',
+                            hintText: 'Enter client name',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the client name';
                           }
                           return null;
                         },
-                        
                       ),
                     ),
                     Container(
@@ -117,17 +115,16 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _phonenumberclientController,
                         decoration: const InputDecoration(
-                          labelText: 'Phone Number',
-                          hintText: 'Enter phone number',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Phone Number',
+                            hintText: 'Enter phone number',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -142,17 +139,16 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _dateController,
                         decoration: const InputDecoration(
-                          labelText: 'Due Date',
-                          hintText: 'Enter the due date',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Due Date',
+                            hintText: 'Enter the due date',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         onTap: () => _selectDate(context),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -167,17 +163,16 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _timeController,
                         decoration: const InputDecoration(
-                          labelText: 'Time',
-                          hintText: 'Enter the time',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Time',
+                            hintText: 'Enter the time',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         onTap: () => _selectTime(context),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -192,17 +187,16 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _offerController,
                         decoration: const InputDecoration(
-                          labelText: 'Offer',
-                          hintText: 'RM',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Offer',
+                            hintText: 'RM',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -217,21 +211,19 @@ class _CreateContractPageState extends State<CreateContractPage> {
                       child: TextFormField(
                         controller: _additionalnoteController,
                         decoration: const InputDecoration(
-                          labelText: 'Additional Note',
-                          hintText: 'Enter additional notes',
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.black, width: 1.0)
-                          ),
-                          filled: true,
-                          fillColor: Colors.white
-                        ),
+                            labelText: 'Additional Note',
+                            hintText: 'Enter additional notes',
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.green, width: 2.0)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.black, width: 1.0)),
+                            filled: true,
+                            fillColor: Colors.white),
                         maxLines: 3,
                       ),
                     ),
-        
                   ],
                 ),
               ),
