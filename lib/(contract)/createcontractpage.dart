@@ -53,8 +53,10 @@ class _CreateContractPageState extends State<CreateContractPage> {
     }
   }
 
-  @override
+ @override
   void dispose() {
+    _clientNameController.dispose();
+    _phonenumberclientController.dispose();
     _dateController.dispose();
     _timeController.dispose();
     _offerController.dispose();
@@ -239,6 +241,9 @@ class _CreateContractPageState extends State<CreateContractPage> {
                   children: [
                     ElevatedButton(
                         onPressed: () {
+                          if (!_formKey.currentState!.validate()) {
+                           
+                          
                           db.collection("Contract").add({
                             'client_name': _clientNameController.text,
                             'client_contact': _phonenumberclientController.text,
@@ -254,7 +259,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
                           Navigator.pop(context);
                           showDialog(context: context, 
                           builder: (_)=> const SnackBar(content: Text('Done Create contact'),));
-                        },
+                        }},
                         child: const Text("Create contract"))
                   ],
                 ),
