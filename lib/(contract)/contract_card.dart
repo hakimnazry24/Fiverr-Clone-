@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/(contract)/createcontractpage.dart';
 
 class ContractCard extends StatelessWidget {
-  var data;
+  var data; // data from gig collection
 
-  // when isForDisplay equals true, it means it is for display only. The "Create Contract" will be removed
-  // By default, it is false
   ContractCard({
     super.key,
     required this.data,
@@ -14,8 +12,6 @@ class ContractCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // child: Text(data.data()["name"]),
-
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -45,6 +41,20 @@ class ContractCard extends StatelessWidget {
               ),
               const SizedBox(
                 height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black),
+                    borderRadius: BorderRadius.circular(15),
+                    color: data.data()["status"] == "pending"
+                        ? Colors.yellow
+                        : data.data()["status"] == "accepted"
+                            ? Colors.blue
+                            : data.data()["status"] == "complete"
+                                ? Colors.green
+                                : Colors.white),
+                padding: EdgeInsets.all(10),
+                child: Text("Status: ${data.data()['status']}"),
               ),
               Text(
                 'Date ${data.data()["date"]}',
@@ -87,22 +97,11 @@ class ContractCard extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black),
-                          borderRadius: BorderRadius.circular(15),
-                          color: data.data()["status"] == "pending"
-                              ? Colors.yellow
-                              : data.data()["status"] == "accepted"
-                                  ? Colors.blue
-                                  : data.data()["status"] == "complete"
-                                      ? Colors.green
-                                      : Colors.white),
-                      padding: EdgeInsets.all(15),
-                      child: Text("Status: ${data.data()['status']}"),
-                    )
+                    ElevatedButton(
+                        onPressed: () {}, child: Text("Accept contract")),
+                    // showDialog(context: context, builder: (_) => AlertDialog(content: Text("ehllo"),)),
                   ],
                 ),
               )
