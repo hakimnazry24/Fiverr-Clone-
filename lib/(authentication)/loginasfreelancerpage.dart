@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_app/(authentication)/createaccountpage.dart";
+import "package:flutter_app/(authentication)/createclientaccountpage.dart";
+import "package:flutter_app/(authentication)/createfreelanceraccountpage.dart";
 import "../homepage.dart";
 
 class LoginAsFreelancerPage extends StatefulWidget {
@@ -83,7 +84,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                 height: 5,
               ),
               ElevatedButton(
-                // redirect user to home page when authentication is successful
+                  // redirect user to home page when authentication is successful
                   onPressed: () {
                     validAccount = loginAccount(
                         usernameController.text, passwordController.text);
@@ -110,7 +111,8 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CreateAccountPage()));
+                                builder: (context) =>
+                                    CreateFreelancerAccountPage()));
                       },
                       child: const Text(
                         "Do not have account as a freelancer yet?",
