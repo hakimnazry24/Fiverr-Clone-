@@ -229,6 +229,12 @@ class _CreateContractPageState extends State<CreateContractPage> {
                             filled: true,
                             fillColor: Colors.white),
                         maxLines: 3,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the additional notes';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],
@@ -241,25 +247,25 @@ class _CreateContractPageState extends State<CreateContractPage> {
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                           
-                          
-                          db.collection("Contract").add({
-                            'client_name': _clientNameController.text,
-                            'client_contact': _phonenumberclientController.text,
-                            'date': _dateController.text,
-                            'time': _timeController.text,
-                            'offer': _offerController.text,
-                            'note': _additionalnoteController.text,
-                            'freelancer_name': widget.data.data()["freelancer_name"],
-                            'freelancer_contact': widget.data.data()["freelancer_contact"],
-                            'service_name': widget.data.data()["service_name"],
-                            'status': 'pending'
-                          });
-                          Navigator.pop(context);
-                          showDialog(context: context, 
-                          builder: (_)=> const SnackBar(content: Text('Done Create contact'),));
-                        }},
+                          if (_formKey.currentState!.validate()) {
+                            FirebaseFirestore.instance.collection("Contract").add({
+                              'client_name': _clientNameController.text,
+                              'client_contact': _phonenumberclientController.text,
+                              'date': _dateController.text,
+                              'time': _timeController.text,
+                              'offer': _offerController.text,
+                              'note': _additionalnoteController.text,
+                              'freelancer_name': widget.data['freelancer_name'],
+                              'freelancer_contact': widget.data['freelancer_contact'],
+                              'service_name': widget.data['service_name'],
+                              'status': 'pending'
+                            });
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Contract created successfully')),
+                            );
+                          }
+                        },
                         child: const Text("Create contract"))
                   ],
                 ),
