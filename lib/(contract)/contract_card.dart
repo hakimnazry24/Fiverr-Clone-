@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/(contract)/createcontractpage.dart';
+import 'package:flutter_app/firebase/firebase_firestore.dart';
 
 class ContractCard extends StatelessWidget {
   var data; // data from gig collection
@@ -50,10 +51,10 @@ class ContractCard extends StatelessWidget {
                         ? Colors.yellow
                         : data.data()["status"] == "accepted"
                             ? Colors.blue
-                            : data.data()["status"] == "complete"
-                                ? Colors.green
+                            : data.data()["status"] == "decline"
+                                ? Colors.red
                                 : Colors.white),
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Text("Status: ${data.data()['status']}"),
               ),
               Text(
@@ -97,11 +98,23 @@ class ContractCard extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ElevatedButton(
-                        onPressed: () {}, child: Text("Accept contract")),
+                        onPressed: () {
+                          db.collection("Contract").doc(data.id).update({
+                            "status": "accepted",
+                          });
+                        },
+                         child: const Text("Accept contract")),
                     // showDialog(context: context, builder: (_) => AlertDialog(content: Text("ehllo"),)),
+                    ElevatedButton(
+                        onPressed: () {
+                          db.collection("Contract").doc(data.id).update({
+                            "status": "decline",
+                          });
+                        },
+                        child: const Text("Decline contract")),
                   ],
                 ),
               )
