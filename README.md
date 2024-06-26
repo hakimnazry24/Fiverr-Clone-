@@ -45,7 +45,14 @@ The main goal of this project is to create a comprehensive and user-centric plat
 1. Create Services Page: Contain widget like form widget that can get input from the user to create services. Has validator with controller input that can get the input and pass it to firebase storage once button is press and form is validate.
 2. Accept Offer Page: Contain similar widget like view contract page in client page, but has additional widget like button to accept or decline the contract offer. The widget is connected to firebase firestorage like the widget that display status.
 
-   picture....
+Login Page
+![Login Diagram](loginpage.png)
+
+Client Page
+![Client Diagram](clientpage.png)
+
+Freelancer Page
+![Freelancer Diagram](freelancerpage.png)
 
 ## Sequence Diagram
 
