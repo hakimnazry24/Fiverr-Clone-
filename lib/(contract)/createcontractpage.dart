@@ -14,7 +14,9 @@ class CreateContractPage extends StatefulWidget {
 
 class _CreateContractPageState extends State<CreateContractPage> {
   Future<void> createContract() async {}
-   final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  final _clientNameController = TextEditingController();
+  final _phonenumberclientController = TextEditingController();
   final _dateController = TextEditingController();
   final _timeController = TextEditingController();
   final _offerController = TextEditingController();
@@ -85,6 +87,56 @@ class _CreateContractPageState extends State<CreateContractPage> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _clientNameController,
+                        decoration: const InputDecoration(
+                          labelText: 'Client Name',
+                          hintText: 'Enter client name',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
+                          ),
+                          filled: true,
+                          fillColor: Colors.white
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the client name';
+                          }
+                          return null;
+                        },
+                        
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        controller: _phonenumberclientController,
+                        decoration: const InputDecoration(
+                          labelText: 'Phone Number',
+                          hintText: 'Enter phone number',
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:  BorderSide(color: Colors.green, width: 2.0 )
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.black, width: 1.0)
+                          ),
+                          filled: true,
+                          fillColor: Colors.white
+                        ),
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the phone number';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
