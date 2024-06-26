@@ -36,6 +36,7 @@ The main goal of this project is to create a comprehensive and user-centric plat
 2. Freelancer: Login page -> Create Services page -> View Contract page -> Accept Contract
 
 **Widget Use**
+
 ***Client***
 1. Services Available page: Contain widget like container and sizedbox that display the data of the services create by freelancer. It also has create contract button that will navigate page to create contract page.
 2. Create Contract page: Contain widget container that display details of the services. Then it has form widget that has validator for each input. The input are client name, client phone no, due date, time, offer, and additional notes. The due date and time input use plugin date and time picker install in flutter. It also has button that will create contract once it has validate. The data will be push to firebase firestorage.
@@ -58,6 +59,8 @@ Freelancer Page
 ![Freelancer Diagram](freelancerpage.png)
 
 ## Sequence Diagram
+
+This is sequence Diagram for this app.
 
 ![sequence diagram](FiverrApp.drawio.png)
 
