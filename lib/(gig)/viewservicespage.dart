@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter_app/(gig)/service_card.dart';
-import 'package:intl/intl.dart';
-import "package:flutter_app/firebase/firebase_firestore.dart";
+
+import 'create_gig_page.dart';
 
 class ViewServicesPage extends StatefulWidget {
   const ViewServicesPage({Key? key}) : super(key: key);
@@ -11,31 +12,36 @@ class ViewServicesPage extends StatefulWidget {
 }
 
 class _ViewServicesPageState extends State<ViewServicesPage> {
-  var services = [];
-  Future<dynamic> getData() async {
-    var data = await db.collection("Gig").get().then((event) {
-      setState(() {
-        services = event.docs;
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    () async {
-      getData();
-    }();
-
     return Scaffold(
-      // body: Text(services[0].data().toString()),
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(height: 10,),
-          padding: EdgeInsets.all(10),
-          itemCount: services.length,
-          itemBuilder: (BuildContext context, index) {
-            return ServiceCard(data: services[index],);
-          }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateGigPage()),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
+      body: StreamBuilder(
+        stream: db.collection("Gig").snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+          var services = snapshot.data!.docs;
+          return ListView.separated(
+            separatorBuilder: (context, index) => SizedBox(height: 10),
+            padding: EdgeInsets.all(10),
+            itemCount: services.length,
+            itemBuilder: (BuildContext context, index) {
+              return ServiceCard(data: services[index]);
+            },
+          );
+        },
+      ),
     );
   }
 }

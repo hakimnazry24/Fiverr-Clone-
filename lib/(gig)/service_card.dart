@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/(contract)/createcontractpage.dart';
+import 'package:flutter_app/(gig)/create_gig_page.dart';
+import 'package:flutter_app/firebase/firebase_firestore.dart';
+
+import 'create_gig_page.dart';
 
 class ServiceCard extends StatelessWidget {
-  var data;
+  final dynamic data;
+  final bool isForDisplay;
 
-  // when isForDisplay equals true, it means it is for display only. The "Create Contract" will be removed
-  // By default, it is false
-  bool isForDisplay;
   ServiceCard({super.key, required this.data, this.isForDisplay = false});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // child: Text(data.data()["name"]),
-
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -32,8 +32,8 @@ class ServiceCard extends StatelessWidget {
             children: [
               Text(
                 data.data()["name"],
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 15, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
               Text(
@@ -46,8 +46,8 @@ class ServiceCard extends StatelessWidget {
               ),
               Text(
                 'RM${data.data()["price_min"]} - RM${data.data()["price_max"]}',
-                style:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    fontSize: 14, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
@@ -60,29 +60,43 @@ class ServiceCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              // display Create Contract button when isForDisplay is true
-              // display empty widget when false
-              !isForDisplay
-                  ? SizedBox(
-                      width: double.infinity,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                              onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => CreateContractPage(
-                                            data: data,
-                                          ))),
-                              child: const Text(
-                                "Create contract",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ))
-                        ],
+              if (!isForDisplay)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CreateGigPage(
+                              gigData: data,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () async {
+                        await db.collection('Gig').doc(data.id).delete();
+                      },
+                    ),
+                    ElevatedButton(
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CreateContractPage(data: data),
+                        ),
                       ),
-                    )
-                  : const SizedBox.shrink()
+                      child: const Text(
+                        "Create contract",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
             ],
           ),
         ),
@@ -90,3 +104,4 @@ class ServiceCard extends StatelessWidget {
     );
   }
 }
+
