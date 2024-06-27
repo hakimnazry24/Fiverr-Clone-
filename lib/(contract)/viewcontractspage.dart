@@ -29,11 +29,16 @@ class _ViewContractsPageState extends State<ViewContractsPage> {
     );
   }
 
+  initState() {
+    super.initState();
+   getData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    () async {
-      getData();
-    }();
+    // () async {
+    //   getData();
+    // }();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: ListView.separated(

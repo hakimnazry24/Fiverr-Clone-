@@ -21,10 +21,17 @@ class _ViewServicesPageState extends State<ViewServicesPage> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     getData();
+  }
+ 
+  @override
   Widget build(BuildContext context) {
-    () async {
-      getData();
-    }();
+    // () async {
+    //   getData();
+    // }();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       floatingActionButton: FloatingActionButton(
