@@ -73,6 +73,10 @@ This is sequence Diagram for this app.
 
 ![sequence diagram](FiverrApp.drawio.png)
 
+## Schedule
+
+![sequence schedule](project_schedule.pdf)
+
 ## References
 
 1. Flutter Official Documentation. Retrieved on 26 June 2024 from https://flutter.dev/docs
