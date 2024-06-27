@@ -14,7 +14,7 @@ class ContractCard extends StatelessWidget {
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Contract ID copied to clipboard')),
+      const SnackBar(content: Text('Phone No copied to clipboard')),
     );
   }
 
