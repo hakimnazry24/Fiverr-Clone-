@@ -11,6 +11,7 @@
 3. Run Flutter app
 `flutter run`
 
+
 # Fiver App
 The Fiverr app is a widely-used platform that connects freelancers with clients seeking various services, from graphic design and digital marketing to writing and programming. The platform has revolutionized the gig economy by providing a streamlined and user-friendly interface for both service providers and clients. Our project aims to replicate the core functionalities of the Fiverr app, creating a robust and scalable platform that facilitates seamless interactions between freelancers and clients.
 
