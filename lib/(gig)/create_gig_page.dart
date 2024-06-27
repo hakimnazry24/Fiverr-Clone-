@@ -36,6 +36,15 @@ class _CreateGigPageState extends State<CreateGigPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Create Gig')),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateGigPage()),
+          );
+        },
+        child: Icon(Icons.add),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -105,7 +114,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () async {
+                onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     var gigData = {
                       'name': _nameController.text,
@@ -116,9 +125,9 @@ class _CreateGigPageState extends State<CreateGigPage> {
                       'description': _descriptionController.text,
                     };
                     if (widget.gigData != null) {
-                      await db.collection('Gig').doc(widget.gigData.id).update(gigData);
+                      db.collection('Gig').doc(widget.gigData.id).update(gigData);
                     } else {
-                      await db.collection('Gig').add(gigData);
+                      db.collection('Gig').add(gigData);
                     }
                     Navigator.pop(context);
                   }

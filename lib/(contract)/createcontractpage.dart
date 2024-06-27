@@ -248,7 +248,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            FirebaseFirestore.instance.collection("Contract").add({
+                            db.collection("Contract").add({
                               'client_name': _clientNameController.text,
                               'client_contact': _phonenumberclientController.text,
                               'date': _dateController.text,
@@ -257,7 +257,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
                               'note': _additionalnoteController.text,
                               'freelancer_name': widget.data['freelancer_name'],
                               'freelancer_contact': widget.data['freelancer_contact'],
-                              'service_name': widget.data['service_name'],
+                              'service_name': widget.data['name'],
                               'status': 'pending'
                             });
                             Navigator.pop(context);
