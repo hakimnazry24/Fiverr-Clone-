@@ -3,6 +3,11 @@
 2. MUHAMMAD HAKIM BIN MD NAZRI 2110457
 3. MUHAMMAD HARITH IRFAN BIN MUHAMAD SUHAILI 2211867
 
+# Work distribution
+Hakim - Authentication subsystem
+Wafi - Contract subsystem
+harith - Gig subsystem
+
 # Instruction
 1. Git clone
 `git clone https://github.com/hakimnazry24/Fiverr-Clone-.git`
