@@ -4,6 +4,10 @@
 3. MUHAMMAD HARITH IRFAN BIN MUHAMAD SUHAILI 2211867
 
 # Work distribution
+|Hakim |Wafi  | Harith|
+--- | --- | ---|
+|data1|data2|data3|
+|data11|data12|data13|
 Hakim - Authentication subsystem
 Wafi - Contract subsystem
 harith - Gig subsystem
