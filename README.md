@@ -47,6 +47,9 @@ The main goal of this project is to create a comprehensive and user-centric plat
  
 ## Screen Navigation and Widgets
 **Screen Navigation**
+
+![Navigation tree](navigation.png)
+
 1. Client: Login page -> Services Available -> Create Contract -> View Contract
 2. Freelancer: Login page -> Create Services page -> View Contract page -> Accept Contract
 
