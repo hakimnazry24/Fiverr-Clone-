@@ -6,11 +6,8 @@
 # Work distribution
 |Hakim |Wafi  | Harith|
 --- | --- | ---|
-|data1|data2|data3|
+|Authentication subsystem|Contract subsystem|Gig subsystem|
 |data11|data12|data13|
-Hakim - Authentication subsystem
-Wafi - Contract subsystem
-harith - Gig subsystem
 
 # Instruction
 1. Git clone
