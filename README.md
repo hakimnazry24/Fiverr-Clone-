@@ -3,6 +3,12 @@
 2. MUHAMMAD HAKIM BIN MD NAZRI 2110457
 3. MUHAMMAD HARITH IRFAN BIN MUHAMAD SUHAILI 2211867
 
+# Work distribution
+|Hakim |Wafi  | Harith|
+|---|---|---|
+|Authentication subsystem|Contract subsystem|Gig subsystem|
+|Setup Firebase|Client view and add contract|freelancer view and add gig|
+
 # Instruction
 1. Git clone
 `git clone https://github.com/hakimnazry24/Fiverr-Clone-.git`
@@ -72,6 +78,10 @@ Freelancer Page
 This is sequence Diagram for this app.
 
 ![sequence diagram](FiverrApp.drawio.png)
+
+## Schedule
+
+![sequence schedule](project_schedule.pdf)
 
 ## References
 
