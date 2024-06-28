@@ -5,7 +5,7 @@
 
 # Work distribution
 |Hakim |Wafi  | Harith|
-
+|---|---|---|
 |Authentication subsystem|Contract subsystem|Gig subsystem|
 |Setup Firebase|Client view and add contract|freelancer view and add gig|
 
