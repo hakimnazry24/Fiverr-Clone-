@@ -7,7 +7,7 @@
 |Hakim |Wafi  | Harith|
 --- | --- | ---|
 |Authentication subsystem|Contract subsystem|Gig subsystem|
-|data11|data12|data13|
+|Setup Firebase|Client view and add contract|freelancer view and add gig|
 
 # Instruction
 1. Git clone
