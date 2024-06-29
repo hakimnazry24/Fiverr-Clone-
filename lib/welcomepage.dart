@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/client/login_as_client_page.dart';
-import 'package:flutter_app/freelancer/login_as_freelancer_page.dart';
+import 'package:flutter_app/client/client_login_page.dart';
+import 'package:flutter_app/freelancer/freelancer_login_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});

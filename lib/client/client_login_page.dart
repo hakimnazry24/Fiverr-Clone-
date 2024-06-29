@@ -3,6 +3,7 @@ import "package:flutter_app/client/client_homepage.dart";
 import "package:flutter_app/client/create_client_account_page.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
+import "package:flutter_app/firebase/firebase_firestore.dart";
 
 class LoginAsClientPage extends StatefulWidget {
   const LoginAsClientPage({super.key});
@@ -85,8 +86,21 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                     try {
                       var credential = await loginAccount(
                           usernameController.text, passwordController.text);
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const ClientHomePage()));
+                      var user = auth.currentUser;
+                      var clientId = user?.uid;
+
+                      // check if this account is a Client account or not
+                      await db.collection("Client").doc(clientId).get().then((doc) {
+                        if (doc.data()?["email"] == usernameController.text) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ClientHomePage()));
+                        } else {
+                          throw Error();
+                        }
+                      });
                     } catch (e) {
                       showDialog(
                           context: context,

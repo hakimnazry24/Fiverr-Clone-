@@ -72,7 +72,6 @@ class _CreateClientAccountPageState extends State<CreateClientAccountPage> {
                           obscureText: true,
                           controller: passwordController,
                           decoration: const InputDecoration(
-                            
                               border: OutlineInputBorder(),
                               hintText: "Password"),
                         ),
@@ -123,13 +122,11 @@ class _CreateClientAccountPageState extends State<CreateClientAccountPage> {
                                     // get current userId and store it in Client collection
                                     var user = auth.currentUser;
                                     var userId = user?.uid;
+                                    var userEmail = user?.email;
                                     db
                                         .collection("Client")
-                                        .add({"clientId": userId});
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                        const SnackBar(
-                                            content: Text(
-                                                "Successfully creating new Client account")));
+                                        .doc(userId)
+                                        .set({"email": userEmail});
                                     ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
                                             content: Text(
