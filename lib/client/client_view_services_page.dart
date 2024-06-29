@@ -30,11 +30,11 @@ class _ClientViewServicesPageState extends State<ClientViewServicesPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
           height: 10,
         ),
         itemCount: services.length,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         itemBuilder: (context, index) {
           return ClientServiceCard(data: services[index]);
         },

@@ -16,14 +16,16 @@ class ClientViewContractsPage extends StatefulWidget {
 
 class _ClientViewContractsPageState extends State<ClientViewContractsPage> {
   var contracts = [];
-  
+
   Future<void> getData(String clientId) async {
     await db
         .collection("Contract")
         .where("clientId", isEqualTo: clientId)
         .get()
         .then((event) {
-      contracts = event.docs;
+      setState(() {
+        contracts = event.docs;
+      });
     });
   }
 
@@ -37,15 +39,20 @@ class _ClientViewContractsPageState extends State<ClientViewContractsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 10,
-        ),
-        itemCount: contracts.length,
-        padding: const EdgeInsets.all(10),
-        itemBuilder: (context, index) {
-          return ClientContractCard(data: contracts[index]);
+      body: RefreshIndicator(
+        onRefresh: () async {
+          getData(widget.client.uid);
         },
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 10,
+          ),
+          itemCount: contracts.length,
+          padding: const EdgeInsets.all(10),
+          itemBuilder: (context, index) {
+            return ClientContractCard(data: contracts[index]);
+          },
+        ),
       ),
     );
   }
