@@ -1,18 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/client_view_contracts_page.dart';
 import 'package:flutter_app/client/client_view_services_page.dart';
+import 'package:flutter_app/firebase/firebase_auth.dart';
 import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
 import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 
-
 class ClientHomePage extends StatefulWidget {
-  const ClientHomePage({super.key});
+  ClientHomePage({super.key});
 
   @override
   State<ClientHomePage> createState() => _ClientHomePageState();
 }
 
 class _ClientHomePageState extends State<ClientHomePage> {
+  var client = auth.currentUser;
+
+  void initState() {
+    client = auth.currentUser!;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -26,14 +33,14 @@ class _ClientHomePageState extends State<ClientHomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
               //TAB 1
-              ClientViewServicesPage(),
+              const ClientViewServicesPage(),
               //TAB 2
               ClientViewContractsPage(
-                // contracts: []
-                ),
+                client: client!,
+              ),
             ],
           )),
     );

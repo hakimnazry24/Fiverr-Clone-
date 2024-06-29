@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/client/client_contract_card.dart';
@@ -5,34 +6,31 @@ import 'package:flutter_app/freelancer/freelancer_contract_card.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
 class ClientViewContractsPage extends StatefulWidget {
-  const ClientViewContractsPage({
-    Key? key,
-  }) : super(key: key);
+  User client;
+  ClientViewContractsPage({super.key, required this.client});
 
   @override
-  State<ClientViewContractsPage> createState() => _ClientViewContractsPageState();
+  State<ClientViewContractsPage> createState() =>
+      _ClientViewContractsPageState();
 }
 
 class _ClientViewContractsPageState extends State<ClientViewContractsPage> {
   var contracts = [];
-  Future<void> getData() async {
-    await db.collection("Contract").get().then((event) {
-      setState(() {
-        contracts = event.docs;
-      });
+  
+  Future<void> getData(String clientId) async {
+    await db
+        .collection("Contract")
+        .where("clientId", isEqualTo: clientId)
+        .get()
+        .then((event) {
+      contracts = event.docs;
     });
   }
 
-  void _copyToClipboard(BuildContext context, String text) {
-    Clipboard.setData(ClipboardData(text: text));
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Contract ID copied to clipboard')),
-    );
-  }
-
+  @override
   initState() {
     super.initState();
-    getData();
+    getData(widget.client.uid);
   }
 
   @override

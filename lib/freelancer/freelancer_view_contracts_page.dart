@@ -28,25 +28,22 @@ class _FreelancerViewContractsPageState extends State<FreelancerViewContractsPag
       const SnackBar(content: Text('Contract ID copied to clipboard')),
     );
   }
-
-  initState() {
+  @override
+  void initState() {
     super.initState();
    getData();
   }
 
   @override
   Widget build(BuildContext context) {
-    // () async {
-    //   getData();
-    // }();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       body: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
           height: 10,
         ),
         itemCount: contracts.length,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         itemBuilder: (context, index) {
           return ContractCard(data: contracts[index]);
         },

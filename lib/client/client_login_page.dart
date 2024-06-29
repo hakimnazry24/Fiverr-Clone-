@@ -96,7 +96,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const ClientHomePage()));
+                                      ClientHomePage()));
                         } else {
                           throw Error();
                         }
@@ -115,7 +115,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const ClientHomePage()));
+                            builder: (context) => ClientHomePage()));
                   },
                   // bypass to Homepage
                   child: const Text("Bypass")),

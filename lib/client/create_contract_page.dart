@@ -4,6 +4,7 @@ import 'package:flutter_app/client/client_service_card.dart';
 import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
+import 'package:flutter_app/firebase/firebase_auth.dart';
 
 class CreateContractPage extends StatefulWidget {
   var data;
@@ -15,7 +16,6 @@ class CreateContractPage extends StatefulWidget {
 }
 
 class _CreateContractPageState extends State<CreateContractPage> {
-  Future<void> createContract() async {}
   final _formKey = GlobalKey<FormState>();
   final _clientNameController = TextEditingController();
   final _phonenumberclientController = TextEditingController();
@@ -23,9 +23,6 @@ class _CreateContractPageState extends State<CreateContractPage> {
   final _timeController = TextEditingController();
   final _offerController = TextEditingController();
   final _additionalnoteController = TextEditingController();
-  
-
-  
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -53,7 +50,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
     }
   }
 
- @override
+  @override
   void dispose() {
     _clientNameController.dispose();
     _phonenumberclientController.dispose();
@@ -66,6 +63,10 @@ class _CreateContractPageState extends State<CreateContractPage> {
 
   @override
   Widget build(BuildContext context) {
+    // get current clientId
+    var client = auth.currentUser;
+    var clientId = client?.uid;
+
     return Scaffold(
       appBar: AppBar(),
       body: ListView(children: [
@@ -247,23 +248,36 @@ class _CreateContractPageState extends State<CreateContractPage> {
                   children: [
                     ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            db.collection("Contract").add({
-                              'client_name': _clientNameController.text,
-                              'client_contact': _phonenumberclientController.text,
-                              'date': _dateController.text,
-                              'time': _timeController.text,
-                              'offer': _offerController.text,
-                              'note': _additionalnoteController.text,
-                              'freelancer_name': widget.data['freelancer_name'],
-                              'freelancer_contact': widget.data['freelancer_contact'],
-                              'service_name': widget.data['name'],
-                              'status': 'pending'
-                            });
-                            Navigator.pop(context);
+                          try {
+                            if (_formKey.currentState!.validate()) {
+                              db.collection("Contract").add({
+                                'client_name': _clientNameController.text,
+                                'client_contact':
+                                    _phonenumberclientController.text,
+                                'date': _dateController.text,
+                                'time': _timeController.text,
+                                'offer': _offerController.text,
+                                'note': _additionalnoteController.text,
+                                'freelancer_name':
+                                    widget.data['freelancer_name'],
+                                'freelancer_contact':
+                                    widget.data['freelancer_contact'],
+                                'service_name': widget.data['name'],
+                                'status': 'pending',
+                                'clientId': clientId
+                              });
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content:
+                                        Text('Contract created successfully')),
+                              );
+                            }
+                          } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Contract created successfully')),
-                            );
+                                const SnackBar(
+                                    content: Text(
+                                        "Unsuccessful creating new Contract. Something is wrong")));
                           }
                         },
                         child: const Text("Create contract"))

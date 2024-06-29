@@ -136,7 +136,7 @@ class _CreateClientAccountPageState extends State<CreateClientAccountPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                const ClientHomePage()));
+                                                ClientHomePage()));
                                   } catch (e) {
                                     showDialog(
                                         context: context,
