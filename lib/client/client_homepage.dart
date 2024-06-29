@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/client_view_contracts_page.dart';
 import 'package:flutter_app/client/client_view_services_page.dart';
-import 'package:flutter_app/freelancer/view_services_page.dart';
-import 'package:flutter_app/freelancer/view_contracts_page.dart';
+import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
+import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 
 
 class ClientHomePage extends StatefulWidget {

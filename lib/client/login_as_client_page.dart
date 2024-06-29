@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_app/client/client_homepage.dart";
 import "package:flutter_app/client/create_client_account_page.dart";
-import "../homepage.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
 
@@ -87,7 +86,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                       var credential = await loginAccount(
                           usernameController.text, passwordController.text);
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => const HomePage()));
+                          MaterialPageRoute(builder: (context) => const ClientHomePage()));
                     } catch (e) {
                       showDialog(
                           context: context,

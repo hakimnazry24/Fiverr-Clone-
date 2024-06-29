@@ -4,14 +4,14 @@ import 'package:flutter_app/client/client_service_card.dart';
 import 'package:flutter_app/freelancer/freelancer_service_card.dart';
 import 'create_gig_page.dart';
 
-class ViewServicesPage extends StatefulWidget {
-  const ViewServicesPage({Key? key}) : super(key: key);
+class FreelancerViewServicesPage extends StatefulWidget {
+  const FreelancerViewServicesPage({Key? key}) : super(key: key);
 
   @override
   _ViewServicesPageState createState() => _ViewServicesPageState();
 }
 
-class _ViewServicesPageState extends State<ViewServicesPage> {
+class _ViewServicesPageState extends State<FreelancerViewServicesPage> {
   var services = [];
   Future<void> getData() async {
     await db.collection("Gig").get().then((event) {

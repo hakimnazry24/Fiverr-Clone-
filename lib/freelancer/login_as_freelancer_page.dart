@@ -1,9 +1,8 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:flutter_app/freelancer/create_freelancer_account_page.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
-import "../homepage.dart";
+import "package:flutter_app/freelancer/freelancer_home_page.dart";
 
 class LoginAsFreelancerPage extends StatefulWidget {
   const LoginAsFreelancerPage({super.key});
@@ -101,7 +100,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const HomePage()));
+                            builder: (context) => const FreelancerHomePage()));
                   },
                   // bypass to Homepage
                   child: const Text("Bypass")),

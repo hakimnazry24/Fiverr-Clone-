@@ -3,16 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_app/freelancer/freelancer_contract_card.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
-class ViewContractsPage extends StatefulWidget {
-  const ViewContractsPage({
+class FreelancerViewContractsPage extends StatefulWidget {
+  const FreelancerViewContractsPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<ViewContractsPage> createState() => _ViewContractsPageState();
+  State<FreelancerViewContractsPage> createState() => _FreelancerViewContractsPageState();
 }
 
-class _ViewContractsPageState extends State<ViewContractsPage> {
+class _FreelancerViewContractsPageState extends State<FreelancerViewContractsPage> {
   var contracts = [];
   Future<void> getData() async {
     await db.collection("Contract").get().then((event) {
