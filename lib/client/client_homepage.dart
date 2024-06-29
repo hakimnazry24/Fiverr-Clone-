@@ -19,6 +19,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text('Fiverr'),
             bottom: const TabBar(tabs: [
               Tab(text: 'Available services'),

@@ -124,12 +124,8 @@ class _CreateFreelancerAccountPageState
                                       var user = auth.currentUser;
                                       var userId = user?.uid;
                                       db
-                                          .collection("Freelancer")
-                                          .add({"freelancerId": userId});
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                              content: Text(
-                                                  "Successfully creating new Freelancer account")));
+                                          .collection("Freelancer").doc(userId)
+                                          .set({"email": emailController.text});
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                               content: Text(

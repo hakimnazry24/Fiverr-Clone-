@@ -16,6 +16,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text('Fiverr'),
             bottom: const TabBar(tabs: [
               Tab(text: 'Available services'),

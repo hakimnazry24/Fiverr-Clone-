@@ -1,6 +1,7 @@
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:flutter_app/freelancer/create_freelancer_account_page.dart";
+import "package:flutter_app/firebase/firebase_firestore.dart";
+import "package:flutter_app/freelancer/freelancer_create_account_page.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
 import "package:flutter_app/freelancer/freelancer_home_page.dart";
 
@@ -86,10 +87,24 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                     try {
                       var credential = await loginAccount(
                           usernameController.text, passwordController.text);
+                      var user = auth.currentUser;
+                      var clientId = user?.uid;
+                      db
+                          .collection("Freelancer")
+                          .doc(clientId)
+                          .get()
+                          .then((doc) {
+                        if (doc.data()?["email"] == user?.email) {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => FreelancerHomePage()));
+                        }
+                      });
                     } catch (e) {
                       showDialog(
                           context: context,
-                          builder: (_) => AlertDialog(
+                          builder: (_) => const AlertDialog(
                                 content: Text("Wrong password and username"),
                               ));
                     }

@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_app/client/client_homepage.dart";
-import "package:flutter_app/client/create_client_account_page.dart";
+import "package:flutter_app/client/client_create_account_page.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
 import "package:flutter_app/firebase/firebase_firestore.dart";

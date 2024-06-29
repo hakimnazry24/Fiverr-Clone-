@@ -25,8 +25,8 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Welcome to Fiverr", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-            SizedBox(
+            const Text("Welcome to Fiverr", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -36,9 +36,9 @@ class _WelcomePageState extends State<WelcomePage> {
                   // button for login as client
                   ElevatedButton(
                       onPressed: () => Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => LoginAsClientPage())),
-                      child: Text("Login as client")),
-                  SizedBox(
+                          MaterialPageRoute(builder: (_) => const LoginAsClientPage())),
+                      child: const Text("Login as client")),
+                  const SizedBox(
                     width: 20,
                   ),
                   // button for login as freelancer
@@ -46,8 +46,8 @@ class _WelcomePageState extends State<WelcomePage> {
                       onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (_) => LoginAsFreelancerPage())),
-                      child: Text("Login as freelancer"))
+                              builder: (_) => const LoginAsFreelancerPage())),
+                      child: const Text("Login as freelancer"))
                 ],
               ),
             )
