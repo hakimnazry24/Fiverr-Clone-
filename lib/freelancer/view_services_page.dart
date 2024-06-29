@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
-import 'package:flutter_app/(gig)/service_card.dart';
+import 'package:flutter_app/client/client_service_card.dart';
+import 'package:flutter_app/freelancer/freelancer_service_card.dart';
 import 'create_gig_page.dart';
 
 class ViewServicesPage extends StatefulWidget {
@@ -22,35 +23,31 @@ class _ViewServicesPageState extends State<ViewServicesPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
      getData();
   }
  
   @override
   Widget build(BuildContext context) {
-    // () async {
-    //   getData();
-    // }();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateGigPage()),
+            MaterialPageRoute(builder: (context) => const CreateGigPage()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: ListView.separated(
-        separatorBuilder: (context, index) => SizedBox(
+        separatorBuilder: (context, index) => const SizedBox(
           height: 10,
         ),
         itemCount: services.length,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         itemBuilder: (context, index) {
-          return ServiceCard(data: services[index]);
+          return FreelancerServiceCard(data: services[index]);
         },
       ),
     );

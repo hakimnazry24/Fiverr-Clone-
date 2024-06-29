@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/client/client_view_contracts_page.dart';
+import 'package:flutter_app/client/client_view_services_page.dart';
 import 'package:flutter_app/freelancer/view_services_page.dart';
 import 'package:flutter_app/freelancer/view_contracts_page.dart';
 
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ClientHomePage extends StatefulWidget {
+  const ClientHomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ClientHomePage> createState() => _ClientHomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ClientHomePageState extends State<ClientHomePage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,12 +25,12 @@ class _HomePageState extends State<HomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               //TAB 1
-              ViewServicesPage(),
+              ClientViewServicesPage(),
               //TAB 2
-              ViewContractsPage(
+              ClientViewContractsPage(
                 // contracts: []
                 ),
             ],

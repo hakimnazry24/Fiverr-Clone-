@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/(contract)/createcontractpage.dart';
+import 'package:flutter_app/client/create_contract_page.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter/services.dart';
 
-class ContractCard extends StatelessWidget {
+class ClientContractCard extends StatelessWidget {
   var data; // data from gig collection
 
-  ContractCard({
+  ClientContractCard({
     super.key,
     required this.data,
   });
@@ -113,32 +113,7 @@ class ContractCard extends StatelessWidget {
               // display Create Contract button when isForDisplay is true
               // display empty widget when false
 
-              SizedBox(
-                width: double.infinity,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            db.collection("Contract").doc(data.id).update({
-                              "status": "accepted",
-                            });
-                          },
-                           child: const Text("Accept contract")),
-                      // showDialog(context: context, builder: (_) => AlertDialog(content: Text("ehllo"),)),
-                      ElevatedButton(
-                          onPressed: () {
-                            db.collection("Contract").doc(data.id).update({
-                              "status": "decline",
-                            });
-                          },
-                          child: const Text("Decline contract")),
-                    ],
-                  ),
-                ),
-              )
+              
             ],
           ),
         ),

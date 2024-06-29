@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/(gig)/service_card.dart';
-import 'package:flutter_app/(contract)/viewcontractspage.dart';
+import 'package:flutter_app/client/client_service_card.dart';
+import 'package:flutter_app/freelancer/view_contracts_page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 
@@ -83,7 +83,7 @@ class _CreateContractPageState extends State<CreateContractPage> {
               const SizedBox(
                 height: 5,
               ),
-              ServiceCard(
+              ClientServiceCard(
                 data: widget.data,
                 isForDisplay: true,
               ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/(contract)/createcontractpage.dart';
-import 'package:flutter_app/(gig)/create_gig_page.dart';
+import 'package:flutter_app/client/create_contract_page.dart';
+import 'package:flutter_app/freelancer/create_gig_page.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 
-import 'create_gig_page.dart';
+import '../freelancer/create_gig_page.dart';
 
-class ServiceCard extends StatelessWidget {
+class ClientServiceCard extends StatelessWidget {
   final dynamic data;
   final bool isForDisplay;
 
-  ServiceCard({super.key, required this.data, this.isForDisplay = false});
+  ClientServiceCard({super.key, required this.data, this.isForDisplay = false});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class ServiceCard extends StatelessWidget {
             children: [
               Text(
                 data.data()["name"],
-                style: const TextStyle(
-                    fontSize: 15, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
               Text(
@@ -46,8 +46,8 @@ class ServiceCard extends StatelessWidget {
               ),
               Text(
                 'RM${data.data()["price_min"]} - RM${data.data()["price_max"]}',
-                style: const TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
@@ -64,25 +64,6 @@ class ServiceCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CreateGigPage(
-                              gigData: data,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        await db.collection('Gig').doc(data.id).delete();
-                      },
-                    ),
                     ElevatedButton(
                       onPressed: () => Navigator.push(
                         context,
@@ -104,4 +85,3 @@ class ServiceCard extends StatelessWidget {
     );
   }
 }
-

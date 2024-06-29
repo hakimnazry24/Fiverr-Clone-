@@ -1,20 +1,21 @@
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:flutter/widgets.dart";
-import "package:flutter_app/(authentication)/createclientaccountpage.dart";
-import "../homepage.dart";
-import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter_app/freelancer/create_freelancer_account_page.dart";
 import "package:flutter_app/firebase/firebase_auth.dart";
+import "../homepage.dart";
 
-class LoginAsClientPage extends StatefulWidget {
-  const LoginAsClientPage({super.key});
+class LoginAsFreelancerPage extends StatefulWidget {
+  const LoginAsFreelancerPage({super.key});
 
   @override
-  State<LoginAsClientPage> createState() => _LoginAsClientPageState();
+  State<LoginAsFreelancerPage> createState() => _LoginAsFreelancerPageState();
 }
 
-class _LoginAsClientPageState extends State<LoginAsClientPage> {
+class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
+  // bool validAccount = false;
 
   Future<UserCredential> loginAccount(String email, String password) async {
     try {
@@ -35,7 +36,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // decoration for background
+        // background decoration
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -52,7 +53,7 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Login as Client",
+                "Login As Freelancer",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -80,14 +81,12 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
               const SizedBox(
                 height: 5,
               ),
-              // authentication using Firebase Authentication
               ElevatedButton(
+                  // redirect user to home page when authentication is successful
                   onPressed: () async {
                     try {
                       var credential = await loginAccount(
                           usernameController.text, passwordController.text);
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
                     } catch (e) {
                       showDialog(
                           context: context,
@@ -97,21 +96,31 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                     }
                   },
                   child: const Text("Login")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
+                  },
+                  // bypass to Homepage
+                  child: const Text("Bypass")),
               Container(
                 padding: const EdgeInsets.only(top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // redirect to register account to create new account
+                    // redirect user to create new account
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CreateClientAccountPage()));
+                                builder: (context) =>
+                                    CreateFreelancerAccountPage()));
                       },
                       child: const Text(
-                        "Do not have account as a client yet?",
+                        "Do not have account as a freelancer yet?",
                         style: TextStyle(
                             fontSize: 12, decoration: TextDecoration.underline),
                       ),

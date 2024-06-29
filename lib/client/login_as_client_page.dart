@@ -1,21 +1,20 @@
-import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
-import "package:flutter_app/(authentication)/createfreelanceraccountpage.dart";
-import "package:flutter_app/firebase/firebase_auth.dart";
+import "package:flutter_app/client/client_homepage.dart";
+import "package:flutter_app/client/create_client_account_page.dart";
 import "../homepage.dart";
+import "package:firebase_auth/firebase_auth.dart";
+import "package:flutter_app/firebase/firebase_auth.dart";
 
-class LoginAsFreelancerPage extends StatefulWidget {
-  const LoginAsFreelancerPage({super.key});
+class LoginAsClientPage extends StatefulWidget {
+  const LoginAsClientPage({super.key});
 
   @override
-  State<LoginAsFreelancerPage> createState() => _LoginAsFreelancerPageState();
+  State<LoginAsClientPage> createState() => _LoginAsClientPageState();
 }
 
-class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
+class _LoginAsClientPageState extends State<LoginAsClientPage> {
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
-  // bool validAccount = false;
 
   Future<UserCredential> loginAccount(String email, String password) async {
     try {
@@ -36,7 +35,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // background decoration
+        // decoration for background
         decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -53,7 +52,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Login As Freelancer",
+                "Login as Client",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -81,37 +80,48 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
               const SizedBox(
                 height: 5,
               ),
+              // authentication using Firebase Authentication
               ElevatedButton(
-                  // redirect user to home page when authentication is successful
                   onPressed: () async {
                     try {
                       var credential = await loginAccount(
                           usernameController.text, passwordController.text);
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => const HomePage()));
                     } catch (e) {
                       showDialog(
                           context: context,
-                          builder: (_) => AlertDialog(
+                          builder: (_) => const AlertDialog(
                                 content: Text("Wrong password and username"),
                               ));
                     }
                   },
                   child: const Text("Login")),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ClientHomePage()));
+                  },
+                  // bypass to Homepage
+                  child: const Text("Bypass")),
               Container(
                 padding: const EdgeInsets.only(top: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // redirect user to create new account
+                    // redirect to register account to create new account
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    CreateFreelancerAccountPage()));
+                                    const CreateClientAccountPage()));
                       },
                       child: const Text(
-                        "Do not have account as a freelancer yet?",
+                        "Do not have account as a client yet?",
                         style: TextStyle(
                             fontSize: 12, decoration: TextDecoration.underline),
                       ),

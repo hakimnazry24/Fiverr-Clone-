@@ -1,6 +1,6 @@
 import "package:firebase_core/firebase_core.dart";
 import 'package:flutter/material.dart';
-import "package:flutter_app/(authentication)/welcomepage.dart";
+import "package:flutter_app/welcomepage.dart";
 import "package:flutter_app/firebase/firebase_options.dart";
 import "package:google_fonts/google_fonts.dart";
 
