@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
 import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
+import "package:flutter_app/firebase/firebase_auth.dart";
 
 class FreelancerHomePage extends StatefulWidget {
   const FreelancerHomePage({super.key});
@@ -10,6 +12,8 @@ class FreelancerHomePage extends StatefulWidget {
 }
 
 class _FreelancerHomePageState extends State<FreelancerHomePage> {
+  User freelancer = auth.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,12 +27,14 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          body: const TabBarView(
+          body: TabBarView(
             children: [
               //TAB 1
-              FreelancerViewServicesPage(),
+              FreelancerViewServicesPage(
+                freelancer: freelancer,
+              ),
               //TAB 2
-              FreelancerViewContractsPage(),
+              FreelancerViewContractsPage(freelancer: freelancer,),
             ],
           )),
     );

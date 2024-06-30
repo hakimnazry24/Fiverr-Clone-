@@ -38,13 +38,13 @@ class ContractCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                data.data()["service_name"],
+                data.data()["service_name"] ?? "No service name",
                 style:
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
               Text(
-                'By ${data.data()["freelancer_name"]}',
+                'By ${data.data()["freelancer_name"] ?? "No freelancer name"}',
                 style: TextStyle(
                     fontSize: 13, color: Colors.black.withOpacity(0.8)),
               ),
@@ -66,7 +66,7 @@ class ContractCard extends StatelessWidget {
                 child: Text("Status: ${data.data()['status']}"),
               ),
               Text(
-                'Date ${data.data()["date"]}',
+                'Date ${data.data()["date"] ?? "No date"}',
                 style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
@@ -74,12 +74,12 @@ class ContractCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Client name: ${data.data()["client_name"]}',
+                'Client name: ${data.data()["client_name"] ?? "No client name"}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
               Text(
-                'Offer made: RM${data.data()["offer"]}',
+                'Offer made: RM${data.data()["offer"] ?? "No offer"}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
@@ -87,7 +87,7 @@ class ContractCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Client contact: ${data.data()["client_contact"]}',
+                'Client contact: ${data.data()["client_contact"] ?? "No client contact"}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
@@ -96,7 +96,7 @@ class ContractCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'Freelancer contact: ${data.data()["freelancer_contact"]}',
+                      'Freelancer contact: ${data.data()["freelancer_contact"] ?? "No freelancer contact"}',
                       style: const TextStyle(fontSize: 13, height: 1.5),
                       textAlign: TextAlign.justify,
                     ),

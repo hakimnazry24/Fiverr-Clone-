@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/firebase/firebase_auth.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 
 class CreateGigPage extends StatefulWidget {
@@ -12,12 +14,16 @@ class CreateGigPage extends StatefulWidget {
 
 class _CreateGigPageState extends State<CreateGigPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _freelancerNameController = TextEditingController();
-  TextEditingController _freelancerContactController = TextEditingController();
-  TextEditingController _priceMinController = TextEditingController();
-  TextEditingController _priceMaxController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _freelancerNameController =
+      TextEditingController();
+  final TextEditingController _freelancerContactController =
+      TextEditingController();
+  final TextEditingController _priceMinController = TextEditingController();
+  final TextEditingController _priceMaxController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+
+  User freelancer = auth.currentUser!;
 
   @override
   void initState() {
@@ -25,7 +31,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
     if (widget.gigData != null) {
       _nameController.text = widget.gigData.data()["name"];
       _freelancerNameController.text = widget.gigData.data()["freelancer_name"];
-      _freelancerContactController.text = widget.gigData.data()["freelancer_contact"];
+      _freelancerContactController.text =
+          widget.gigData.data()["freelancer_contact"];
       _priceMinController.text = widget.gigData.data()["price_min"].toString();
       _priceMaxController.text = widget.gigData.data()["price_max"].toString();
       _descriptionController.text = widget.gigData.data()["description"];
@@ -35,15 +42,15 @@ class _CreateGigPageState extends State<CreateGigPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Create Gig')),
+      appBar: AppBar(title: const Text('Create Gig')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CreateGigPage()),
+            MaterialPageRoute(builder: (context) => const CreateGigPage()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,7 +60,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the gig name';
@@ -63,7 +70,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               TextFormField(
                 controller: _freelancerNameController,
-                decoration: InputDecoration(labelText: 'Freelancer Name'),
+                decoration: const InputDecoration(labelText: 'Freelancer Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the freelancer name';
@@ -73,7 +80,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               TextFormField(
                 controller: _freelancerContactController,
-                decoration: InputDecoration(labelText: 'Freelancer Contact'),
+                decoration:
+                    const InputDecoration(labelText: 'Freelancer Contact'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the freelancer contact';
@@ -83,7 +91,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               TextFormField(
                 controller: _priceMinController,
-                decoration: InputDecoration(labelText: 'Minimum Price'),
+                decoration: const InputDecoration(labelText: 'Minimum Price'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the minimum price';
@@ -93,7 +101,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               TextFormField(
                 controller: _priceMaxController,
-                decoration: InputDecoration(labelText: 'Maximum Price'),
+                decoration: const InputDecoration(labelText: 'Maximum Price'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the maximum price';
@@ -103,7 +111,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
               ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -112,7 +120,7 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -123,16 +131,33 @@ class _CreateGigPageState extends State<CreateGigPage> {
                       'price_min': int.parse(_priceMinController.text),
                       'price_max': int.parse(_priceMaxController.text),
                       'description': _descriptionController.text,
+                      'freelancerId': freelancer.uid
                     };
                     if (widget.gigData != null) {
-                      db.collection('Gig').doc(widget.gigData.id).update(gigData);
+                      try {
+                        db
+                            .collection('Gig')
+                            .doc(widget.gigData.id)
+                            .update(gigData);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text("Successfully add new Gig")));
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text(
+                                    "Cannot add new Gig. Something is wrong")));
+                      }
                     } else {
                       db.collection('Gig').add(gigData);
                     }
-                    Navigator.pop(context);
+                    Navigator.pop(
+                      context,
+                    );
                   }
                 },
-                child: Text(widget.gigData != null ? 'Update Gig' : 'Create Gig'),
+                child:
+                    Text(widget.gigData != null ? 'Update Gig' : 'Create Gig'),
               ),
             ],
           ),

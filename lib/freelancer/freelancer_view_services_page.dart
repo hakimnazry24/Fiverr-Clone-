@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter_app/client/client_service_card.dart';
@@ -5,7 +6,9 @@ import 'package:flutter_app/freelancer/freelancer_service_card.dart';
 import 'create_gig_page.dart';
 
 class FreelancerViewServicesPage extends StatefulWidget {
-  const FreelancerViewServicesPage({Key? key}) : super(key: key);
+  User freelancer;
+  FreelancerViewServicesPage({Key? key, required this.freelancer})
+      : super(key: key);
 
   @override
   _ViewServicesPageState createState() => _ViewServicesPageState();
@@ -14,7 +17,11 @@ class FreelancerViewServicesPage extends StatefulWidget {
 class _ViewServicesPageState extends State<FreelancerViewServicesPage> {
   var services = [];
   Future<void> getData() async {
-    await db.collection("Gig").get().then((event) {
+    await db
+        .collection("Gig")
+        .where("freelancerId", isEqualTo: widget.freelancer.uid)
+        .get()
+        .then((event) {
       setState(() {
         services = event.docs;
       });
@@ -24,31 +31,37 @@ class _ViewServicesPageState extends State<FreelancerViewServicesPage> {
   @override
   void initState() {
     super.initState();
-     getData();
+    getData();
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const CreateGigPage()),
           );
+          getData();
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 10,
-        ),
-        itemCount: services.length,
-        padding: const EdgeInsets.all(10),
-        itemBuilder: (context, index) {
-          return FreelancerServiceCard(data: services[index]);
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await getData();
         },
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 10,
+          ),
+          itemCount: services.length,
+          padding: const EdgeInsets.all(10),
+          itemBuilder: (context, index) {
+            return FreelancerServiceCard(data: services[index]);
+          },
+        ),
       ),
     );
   }
