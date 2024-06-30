@@ -25,7 +25,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
               builder: (context) {
                 return IconButton(
                     onPressed: () {
-                      Scaffold.of(context).openDrawer();``
+                      Scaffold.of(context).openDrawer();
                     },
                     icon: Icon(Icons.menu));
               },
