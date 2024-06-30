@@ -31,7 +31,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
               },
             ),
             automaticallyImplyLeading: false,
-            title: const Text('Fiverr'),
+            title: const Text('Fiverr (Freelancer)'),
             bottom: const TabBar(tabs: [
               Tab(text: 'Available services'),
               Tab(text: 'Contracts'),

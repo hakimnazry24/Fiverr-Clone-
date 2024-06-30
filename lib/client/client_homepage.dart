@@ -37,7 +37,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
               );
             }),
             automaticallyImplyLeading: false,
-            title: const Text('Fiverr'),
+            title: const Text('Fiverr (Client)'),
             bottom: const TabBar(tabs: [
               Tab(text: 'Available services'),
               Tab(text: 'Contracts'),
