@@ -27,7 +27,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
                     onPressed: () {
                       Scaffold.of(context).openDrawer();
                     },
-                    icon: Icon(Icons.menu));
+                    icon: const Icon(Icons.menu));
               },
             ),
             automaticallyImplyLeading: false,

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/create_contract_page.dart';
-import 'package:flutter_app/freelancer/create_gig_page.dart';
-import 'package:flutter_app/firebase/firebase_firestore.dart';
-
-import '../freelancer/create_gig_page.dart';
 
 class ClientServiceCard extends StatelessWidget {
   final dynamic data;
   final bool isForDisplay;
 
-  ClientServiceCard({super.key, required this.data, this.isForDisplay = false});
+  const ClientServiceCard({super.key, required this.data, this.isForDisplay = false});
 
   @override
   Widget build(BuildContext context) {

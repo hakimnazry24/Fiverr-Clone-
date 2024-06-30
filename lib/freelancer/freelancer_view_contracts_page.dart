@@ -1,14 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/freelancer/freelancer_contract_card.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
 class FreelancerViewContractsPage extends StatefulWidget {
-  User freelancer;
+  final User freelancer;
 
-  FreelancerViewContractsPage({Key? key, required this.freelancer})
-      : super(key: key);
+  const FreelancerViewContractsPage({super.key, required this.freelancer});
 
   @override
   State<FreelancerViewContractsPage> createState() =>

@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/client_view_contracts_page.dart';
 import 'package:flutter_app/client/client_view_services_page.dart';
 import 'package:flutter_app/components/drawer.dart';
 import 'package:flutter_app/firebase/firebase_auth.dart';
-import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
-import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 
 class ClientHomePage extends StatefulWidget {
   ClientHomePage({super.key});
@@ -33,7 +30,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
                 onPressed: () {
                   Scaffold.of(context).openDrawer();
                 },
-                icon: Icon(Icons.menu),
+                icon: const Icon(Icons.menu),
               );
             }),
             automaticallyImplyLeading: false,

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/create_contract_page.dart';
-import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter/services.dart';
 
 class ClientContractCard extends StatelessWidget {
-  var data; // data from gig collection
+  final data; // data from gig collection
 
-  ClientContractCard({
+  const ClientContractCard({
     super.key,
     required this.data,
   });

@@ -106,7 +106,6 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                           }
                         });
                       } catch (e) {
-                        print(e);
                         showDialog(
                             context: context,
                             builder: (_) => const AlertDialog(

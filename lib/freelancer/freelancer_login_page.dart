@@ -98,7 +98,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (_) => FreelancerHomePage()));
+                                  builder: (_) => const FreelancerHomePage()));
                         }
                       });
                     } catch (e) {
@@ -131,7 +131,7 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    CreateFreelancerAccountPage()));
+                                    const CreateFreelancerAccountPage()));
                       },
                       child: const Text(
                         "Do not have account as a freelancer yet?",

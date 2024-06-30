@@ -3,7 +3,7 @@ import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter_app/client/client_service_card.dart';
 
 class ClientViewServicesPage extends StatefulWidget {
-  const ClientViewServicesPage({Key? key}) : super(key: key);
+  const ClientViewServicesPage({super.key});
 
   @override
   _ClientViewServicesPageState createState() => _ClientViewServicesPageState();

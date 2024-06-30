@@ -1,15 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/client_service_card.dart';
-import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter_app/firebase/firebase_auth.dart';
 
 class CreateContractPage extends StatefulWidget {
-  var data;
+  final data;
 
-  CreateContractPage({super.key, required this.data});
+  const CreateContractPage({super.key, required this.data});
 
   @override
   State<CreateContractPage> createState() => _CreateContractPageState();

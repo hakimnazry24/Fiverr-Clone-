@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import "package:flutter_app/firebase/firebase_auth.dart";
 import 'package:flutter_app/welcomepage.dart';
@@ -43,7 +42,7 @@ class AppDrawer extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
-                                  builder: (context) => WelcomePage()),
+                                  builder: (context) => const WelcomePage()),
                               (route) => false);
                         },
                         style: ElevatedButton.styleFrom(

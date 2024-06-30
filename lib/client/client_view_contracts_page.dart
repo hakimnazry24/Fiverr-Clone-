@@ -1,13 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/client/client_contract_card.dart';
-import 'package:flutter_app/freelancer/freelancer_contract_card.dart';
 import "package:flutter_app/firebase/firebase_firestore.dart";
 
 class ClientViewContractsPage extends StatefulWidget {
-  User client;
-  ClientViewContractsPage({super.key, required this.client});
+  final User client;
+  const ClientViewContractsPage({super.key, required this.client});
 
   @override
   State<ClientViewContractsPage> createState() =>
