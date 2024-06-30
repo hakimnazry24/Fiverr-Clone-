@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/drawer.dart';
 import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
 import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 import "package:flutter_app/firebase/firebase_auth.dart";
@@ -20,6 +21,15 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
+            leading: Builder(
+              builder: (context) {
+                return IconButton(
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();``
+                    },
+                    icon: Icon(Icons.menu));
+              },
+            ),
             automaticallyImplyLeading: false,
             title: const Text('Fiverr'),
             bottom: const TabBar(tabs: [
@@ -27,6 +37,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
+          drawer: AppDrawer(),
           body: TabBarView(
             children: [
               //TAB 1
@@ -34,7 +45,9 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
                 freelancer: freelancer,
               ),
               //TAB 2
-              FreelancerViewContractsPage(freelancer: freelancer,),
+              FreelancerViewContractsPage(
+                freelancer: freelancer,
+              ),
             ],
           )),
     );

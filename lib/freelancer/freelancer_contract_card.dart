@@ -111,9 +111,9 @@ class ContractCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+
               // display Create Contract button when isForDisplay is true
               // display empty widget when false
-
               SizedBox(
                 width: double.infinity,
                 child: SingleChildScrollView(

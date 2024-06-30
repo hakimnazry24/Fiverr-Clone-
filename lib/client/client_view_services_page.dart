@@ -11,6 +11,7 @@ class ClientViewServicesPage extends StatefulWidget {
 
 class _ClientViewServicesPageState extends State<ClientViewServicesPage> {
   var services = [];
+
   Future<void> getData() async {
     await db.collection("Gig").get().then((event) {
       setState(() {
@@ -29,15 +30,20 @@ class _ClientViewServicesPageState extends State<ClientViewServicesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: ListView.separated(
-        separatorBuilder: (context, index) => const SizedBox(
-          height: 10,
-        ),
-        itemCount: services.length,
-        padding: const EdgeInsets.all(10),
-        itemBuilder: (context, index) {
-          return ClientServiceCard(data: services[index]);
+      body: RefreshIndicator(
+        onRefresh: () async {
+          await getData();
         },
+        child: ListView.separated(
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 10,
+          ),
+          itemCount: services.length,
+          padding: const EdgeInsets.all(10),
+          itemBuilder: (context, index) {
+            return ClientServiceCard(data: services[index]);
+          },
+        ),
       ),
     );
   }
