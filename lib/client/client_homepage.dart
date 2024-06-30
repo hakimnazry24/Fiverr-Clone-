@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/client/client_drawer.dart';
 import 'package:flutter_app/client/client_view_contracts_page.dart';
 import 'package:flutter_app/client/client_view_services_page.dart';
 import 'package:flutter_app/components/drawer.dart';
@@ -40,7 +41,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          drawer: AppDrawer(),
+          drawer: const ClientDrawer(),
           body: TabBarView(
             children: [
               //TAB 1

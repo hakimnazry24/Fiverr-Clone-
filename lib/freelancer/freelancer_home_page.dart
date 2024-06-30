@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/drawer.dart';
+import 'package:flutter_app/freelancer/freelancer_drawer.dart';
 import 'package:flutter_app/freelancer/freelancer_view_services_page.dart';
 import 'package:flutter_app/freelancer/freelancer_view_contracts_page.dart';
 import "package:flutter_app/firebase/firebase_auth.dart";
@@ -37,7 +37,7 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
               Tab(text: 'Contracts'),
             ]),
           ),
-          drawer: AppDrawer(),
+          drawer: FreelancerDrawer(),
           body: TabBarView(
             children: [
               //TAB 1
