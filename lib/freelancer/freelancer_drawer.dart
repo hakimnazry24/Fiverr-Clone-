@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/about_page.dart';
 import "package:flutter_app/firebase/firebase_auth.dart";
 import 'package:flutter_app/welcomepage.dart';
 
 class FreelancerDrawer extends StatelessWidget {
-  FreelancerDrawer({super.key});
+  const FreelancerDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +63,11 @@ class FreelancerDrawer extends StatelessWidget {
           leading: Icon(Icons.settings),
           title: Text("Settings"),
         ),
-        const ListTile(
-          leading: Icon(Icons.info),
-          title: Text("About"),
+        ListTile(
+          leading: const Icon(Icons.info),
+          title: const Text("About"),
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AboutPage())),
         ),
       ],
     ));

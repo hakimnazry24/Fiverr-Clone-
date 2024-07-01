@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/client/client_profile_page.dart';
+import 'package:flutter_app/components/about_page.dart';
 import "package:flutter_app/firebase/firebase_auth.dart";
 import 'package:flutter_app/welcomepage.dart';
 
@@ -66,9 +67,11 @@ class ClientDrawer extends StatelessWidget {
           leading: Icon(Icons.settings),
           title: Text("Settings"),
         ),
-        const ListTile(
+        ListTile(
           leading: Icon(Icons.info),
           title: Text("About"),
+          onTap: () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) =>  const AboutPage())),
         ),
       ],
     ));
