@@ -25,8 +25,8 @@ class ClientDrawer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Fiverr",
-                      style: TextStyle(fontSize: 30, color: Colors.white),
+                      "IIUM Freelancer",
+                      style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                     const SizedBox(
                       height: 10,
