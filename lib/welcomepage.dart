@@ -100,7 +100,7 @@ class WelcomePage extends StatelessWidget {
                               MaterialPageRoute(
                                   builder: (context) =>
                                       const LoginAsFreelancerPage())),
-                          child: const Text("Log in as Client")),
+                          child: const Text("Log in as Freelancer")),
                     )
                   ],
                 ),
