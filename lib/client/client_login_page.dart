@@ -33,6 +33,13 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
   }
 
   @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LoadingOverlay(
       child: Scaffold(
@@ -91,16 +98,19 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                             usernameController.text, passwordController.text);
                         var user = auth.currentUser;
                         var clientId = user?.uid;
-      
+
                         // check if this account is a Client account or not
-                        await db.collection("Client").doc(clientId).get().then((doc) {
+                        await db
+                            .collection("Client")
+                            .doc(clientId)
+                            .get()
+                            .then((doc) {
                           if (doc.data()?["email"] == usernameController.text) {
                             // LoginLoadingOverlay.of(context).show();
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        ClientHomePage()));
+                                    builder: (context) => ClientHomePage()));
                           } else {
                             throw Error();
                           }
@@ -115,7 +125,9 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                     },
                     child: const Text("Login")),
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      // temporary account used for bypass
+                      await loginAccount("client@gmail.com", "client123");
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -140,7 +152,8 @@ class _LoginAsClientPageState extends State<LoginAsClientPage> {
                         child: const Text(
                           "Do not have account as a client yet?",
                           style: TextStyle(
-                              fontSize: 12, decoration: TextDecoration.underline),
+                              fontSize: 12,
+                              decoration: TextDecoration.underline),
                         ),
                       )
                     ],

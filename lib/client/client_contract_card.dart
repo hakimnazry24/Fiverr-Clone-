@@ -67,7 +67,7 @@ class _ClientContractCardState extends State<ClientContractCard> {
                     color: widget.data.data()["status"] == "pending"
                         ? Colors.yellow
                         : widget.data.data()["status"] == "accepted"
-                            ? Colors.blue
+                            ? Colors.green
                             : widget.data.data()["status"] == "decline"
                                 ? Colors.red
                                 : Colors.white),

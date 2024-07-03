@@ -33,6 +33,13 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
   }
 
   @override
+  void dispose() {
+    usernameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -110,14 +117,16 @@ class _LoginAsFreelancerPageState extends State<LoginAsFreelancerPage> {
                     }
                   },
                   child: const Text("Login")),
+              // bypass to Homepage
               ElevatedButton(
                   onPressed: () {
+                    // temporary account used for bypass
+                    loginAccount("freelancer@gmail.com", "freelancer123");
                     Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const FreelancerHomePage()));
                   },
-                  // bypass to Homepage
                   child: const Text("Bypass")),
               Container(
                 padding: const EdgeInsets.only(top: 20),
