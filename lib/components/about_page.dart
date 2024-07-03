@@ -116,10 +116,17 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 40,),
+              const SizedBox(
+                height: 40,
+              ),
               Row(
                 children: [
-                  Text("p.s. just press the social links", style: TextStyle(fontStyle: FontStyle.italic, color: Colors.black.withOpacity(0.6)),),
+                  Text(
+                    "p.s. just press the social links",
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: Colors.black.withOpacity(0.6)),
+                  ),
                 ],
               )
             ],

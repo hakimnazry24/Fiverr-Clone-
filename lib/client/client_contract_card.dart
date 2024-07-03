@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/client/create_contract_page.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/firebase/firebase_firestore.dart';
 
-class ClientContractCard extends StatelessWidget {
+class ClientContractCard extends StatefulWidget {
   final data; // data from gig collection
 
   const ClientContractCard({
@@ -10,6 +12,11 @@ class ClientContractCard extends StatelessWidget {
     required this.data,
   });
 
+  @override
+  State<ClientContractCard> createState() => _ClientContractCardState();
+}
+
+class _ClientContractCardState extends State<ClientContractCard> {
   void _copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
@@ -17,9 +24,12 @@ class ClientContractCard extends StatelessWidget {
     );
   }
 
+  bool isDisposeCard = false;
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    // return SizedBox.shrink() when the Contract is deleted
+    return !isDisposeCard ? SizedBox(
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -37,13 +47,13 @@ class ClientContractCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                data.data()["service_name"],
+                widget.data.data()["service_name"],
                 style:
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
               ),
               Text(
-                'By ${data.data()["freelancer_name"]}',
+                'By ${widget.data.data()["freelancer_name"]}',
                 style: TextStyle(
                     fontSize: 13, color: Colors.black.withOpacity(0.8)),
               ),
@@ -54,18 +64,18 @@ class ClientContractCard extends StatelessWidget {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.black),
                     borderRadius: BorderRadius.circular(15),
-                    color: data.data()["status"] == "pending"
+                    color: widget.data.data()["status"] == "pending"
                         ? Colors.yellow
-                        : data.data()["status"] == "accepted"
+                        : widget.data.data()["status"] == "accepted"
                             ? Colors.blue
-                            : data.data()["status"] == "decline"
+                            : widget.data.data()["status"] == "decline"
                                 ? Colors.red
                                 : Colors.white),
                 padding: const EdgeInsets.all(10),
-                child: Text("Status: ${data.data()['status']}"),
+                child: Text("Status: ${widget.data.data()['status']}"),
               ),
               Text(
-                'Date ${data.data()["date"]}',
+                'Date ${widget.data.data()["date"]}',
                 style:
                     const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
@@ -73,12 +83,12 @@ class ClientContractCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Client name: ${data.data()["client_name"]}',
+                'Client name: ${widget.data.data()["client_name"]}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
               Text(
-                'Offer made: RM${data.data()["offer"]}',
+                'Offer made: RM${widget.data.data()["offer"]}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
@@ -86,37 +96,80 @@ class ClientContractCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Client contact: ${data.data()["client_contact"]}',
+                'Client contact: ${widget.data.data()["client_contact"]}',
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
-
               Row(
                 children: [
                   Expanded(
                     child: Text(
-                      'Freelancer contact: ${data.data()["freelancer_contact"]}',
+                      'Freelancer contact: ${widget.data.data()["freelancer_contact"]}',
                       style: const TextStyle(fontSize: 13, height: 1.5),
                       textAlign: TextAlign.justify,
                     ),
                   ),
                   IconButton(
                     icon: const Icon(Icons.copy),
-                    onPressed: () => _copyToClipboard(context, data.data()["freelancer_contact"]),
+                    onPressed: () => _copyToClipboard(
+                        context, widget.data.data()["freelancer_contact"]),
                   ),
                 ],
               ),
               const SizedBox(
                 height: 10,
               ),
-              // display Create Contract button when isForDisplay is true
-              // display empty widget when false
-
-              
+              Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                                  title: const Text("Delete contract"),
+                                  content: const Text(
+                                      "Are you sure to delete this Contract?"),
+                                  actions: [
+                                    ElevatedButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text("Cancel")),
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          try {
+                                            await db
+                                                .collection("Contract")
+                                                .doc(widget.data.id)
+                                                .delete();
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        "Successfully delete Contract")));
+                                            setState(() {
+                                              isDisposeCard = true;
+                                            });
+                                            Navigator.pop(context);
+                                          } catch (e) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(const SnackBar(
+                                                    content: Text(
+                                                        "Unsuccessfully delete Contract. Something is wrong")));
+                                          }
+                                        },
+                                        child: const Text("Delete")),
+                                  ],
+                                ));
+                      },
+                      icon: const Icon(Icons.delete)),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  // IconButton(onPressed: editContract, icon: const Icon(Icons.edit)),
+                ],
+              )
             ],
           ),
         ),
       ),
-    );
+    ) : const SizedBox.shrink();
   }
 }
