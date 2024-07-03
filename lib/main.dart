@@ -24,6 +24,11 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         theme: ThemeData(
           useMaterial3: true,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: const Color.fromRGBO(111, 250, 167, 1),
+          )),
           colorScheme: ColorScheme.fromSeed(
             secondary: const Color.fromARGB(255, 223, 255, 223),
             primary: const Color.fromRGBO(111, 250, 167, 1),

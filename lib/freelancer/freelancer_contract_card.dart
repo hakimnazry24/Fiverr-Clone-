@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 import 'package:flutter/services.dart';
 
-class ContractCard extends StatelessWidget {
+class FreelancerContractCard extends StatelessWidget {
   final dynamic data; // data from gig collection
 
-  const ContractCard({
+  const FreelancerContractCard({
     super.key,
     required this.data,
   });
@@ -90,7 +90,6 @@ class ContractCard extends StatelessWidget {
                 style: const TextStyle(fontSize: 13, height: 1.5),
                 textAlign: TextAlign.justify,
               ),
-
               Row(
                 children: [
                   Expanded(
@@ -110,9 +109,6 @@ class ContractCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-
-              // display Create Contract button when isForDisplay is true
-              // display empty widget when false
               SizedBox(
                 width: double.infinity,
                 child: SingleChildScrollView(

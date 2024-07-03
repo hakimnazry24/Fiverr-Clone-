@@ -50,7 +50,7 @@ class _FreelancerViewContractsPageState
           itemCount: contracts.length,
           padding: const EdgeInsets.all(10),
           itemBuilder: (context, index) {
-            return ContractCard(data: contracts[index]);
+            return FreelancerContractCard(data: contracts[index]);
           },
         ),
       ),
