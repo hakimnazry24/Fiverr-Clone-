@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_app/client/create_contract_page.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
 

@@ -263,7 +263,8 @@ class _CreateContractPageState extends State<CreateContractPage> {
                                 'service_name': widget.data['name'],
                                 'status': 'pending',
                                 'clientId': clientId,
-                                'freelancerId': widget.data["freelancerId"]
+                                'freelancerId': widget.data["freelancerId"],
+                                'hide_from_freelancer': false
                               });
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
