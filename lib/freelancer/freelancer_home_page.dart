@@ -33,8 +33,8 @@ class _FreelancerHomePageState extends State<FreelancerHomePage> {
             automaticallyImplyLeading: false,
             title: const Text('IIUM Freelancer (Freelancer)'),
             bottom: const TabBar(tabs: [
-              Tab(text: 'Available services'),
-              Tab(text: 'Contracts'),
+              Tab(text: 'Your services'),
+              Tab(text: 'Your contracts'),
             ]),
           ),
           drawer: FreelancerDrawer(),
