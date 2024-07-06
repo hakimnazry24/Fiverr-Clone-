@@ -11,6 +11,8 @@ class FreelancerServiceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> categories = data.data()["categories"];
+
     return SizedBox(
       child: Container(
         decoration: BoxDecoration(
@@ -57,6 +59,18 @@ class FreelancerServiceCard extends StatelessWidget {
               ),
               const SizedBox(
                 height: 10,
+              ),
+               Wrap(
+                children: categories
+                    .map((category) => Container(
+                          margin: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.fromLTRB(7, 3, 7, 3),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                              color: Theme.of(context).colorScheme.primary),
+                          child: Text(category, style: const TextStyle(fontSize: 12),),
+                        ))
+                    .toList(),
               ),
               if (!isForDisplay)
                 Row(

@@ -177,8 +177,6 @@ class _CreateGigPageState extends State<CreateGigPage> {
                             Text(
                               category,
                             ),
-                            // const SizedBox(width: 4,),
-                            // IconButton(onPressed: () {
                             const SizedBox(
                               width: 3,
                             ),
