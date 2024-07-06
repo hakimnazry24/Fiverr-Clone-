@@ -1,0 +1,33 @@
+// ADD NEW CATEGORIES OF GIG HERE, JUST IGNORE THE ARRANGEMENT, IT WILL BE SORTED AUTOMATICALLY
+const List<String> gig_categories = [
+  "Web Development",
+  "Mobile App Development",
+  "Software Development",
+  "E-Commerce Development",
+  "Graphic Design",
+  "UI/UX Design",
+  "Logo Design",
+  "Animation",
+  "Video Editing",
+  "Copywriting",
+  "Content Writing",
+  "Translation Services",
+  "Technical Writing",
+  "Customer Support",
+  "Data Entry",
+  "Digital Marketing",
+  "Architecture",
+  "Computer-Aided Design (CAD)",
+  "Legal Writing",
+  "Contract Law",
+  "Online Tutoring",
+  "Course Creation",
+  "Language Instruction",
+  "Educational Consulting",
+  "Fitness Training",
+  "Audio Editing",
+  "Music Production",
+  "Voiceover Services",
+  "Sound Design"
+      "Videography"
+];

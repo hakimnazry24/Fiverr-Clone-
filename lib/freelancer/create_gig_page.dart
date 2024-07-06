@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase/firebase_auth.dart';
 import 'package:flutter_app/firebase/firebase_firestore.dart';
+import "package:flutter_app/misc/gig_categories.dart";
 
 class CreateGigPage extends StatefulWidget {
   final dynamic gigData;
@@ -22,6 +23,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
   final TextEditingController _priceMinController = TextEditingController();
   final TextEditingController _priceMaxController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _categoriesController = TextEditingController();
+  List<String> selectedCategories = [];
 
   User freelancer = auth.currentUser!;
 
@@ -60,7 +63,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
             children: [
               TextFormField(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(
+                    labelText: 'Name of the Gig', border: OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the gig name';
@@ -68,9 +72,13 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _freelancerNameController,
-                decoration: const InputDecoration(labelText: 'Freelancer Name'),
+                decoration: const InputDecoration(
+                    labelText: 'Your Name', border: OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the freelancer name';
@@ -78,10 +86,14 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _freelancerContactController,
-                decoration:
-                    const InputDecoration(labelText: 'Freelancer Contact'),
+                decoration: const InputDecoration(
+                    labelText: 'Your Contact Number',
+                    border: OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the freelancer contact';
@@ -89,9 +101,14 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _priceMinController,
-                decoration: const InputDecoration(labelText: 'Minimum Price'),
+                decoration: const InputDecoration(
+                    labelText: 'Minimum Price for Your Service',
+                    border: OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the minimum price';
@@ -99,9 +116,14 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _priceMaxController,
-                decoration: const InputDecoration(labelText: 'Maximum Price'),
+                decoration: const InputDecoration(
+                    labelText: 'Maximum Price for Your Service',
+                    border: OutlineInputBorder()),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the maximum price';
@@ -109,9 +131,14 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   return null;
                 },
               ),
+              const SizedBox(
+                height: 10,
+              ),
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(
+                    labelText: 'Description of Your Service',
+                    border: OutlineInputBorder()),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -119,6 +146,57 @@ class _CreateGigPageState extends State<CreateGigPage> {
                   }
                   return null;
                 },
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              DropdownMenu(
+                  controller: _categoriesController,
+                  requestFocusOnTap: false,
+                  label: const Text("Categories"),
+                  onSelected: (category) {
+                    setState(() {
+                      selectedCategories.add(category!);
+                    });
+                  },
+                  dropdownMenuEntries: gig_categories
+                      .map((category) =>
+                          DropdownMenuEntry(value: category, label: category))
+                      .toList()),
+              Wrap(
+                children: selectedCategories
+                    .map((category) => Container(
+                        margin: const EdgeInsets.all(3),
+                        decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.primary,
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.fromLTRB(5, 3, 5, 3),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              category,
+                            ),
+                            // const SizedBox(width: 4,),
+                            // IconButton(onPressed: () {
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            GestureDetector(
+                              child: const Icon(
+                                Icons.close,
+                                size: 15,
+                              ),
+                              onTap: () {
+                                setState(() {
+                                  selectedCategories.remove(category);
+                                });
+                              },
+                            )
+                            // }, icon: const Icon(Icons.close_rounded, size: 15,), )
+                          ],
+                        )))
+                    .toList(),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -131,7 +209,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
                       'price_min': int.parse(_priceMinController.text),
                       'price_max': int.parse(_priceMaxController.text),
                       'description': _descriptionController.text,
-                      'freelancerId': freelancer.uid
+                      'freelancerId': freelancer.uid,
+                      'categories': selectedCategories
                     };
                     if (widget.gigData != null) {
                       try {
@@ -154,6 +233,8 @@ class _CreateGigPageState extends State<CreateGigPage> {
                     Navigator.pop(
                       context,
                     );
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Successfully add new Gig")));
                   }
                 },
                 child:
