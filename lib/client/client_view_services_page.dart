@@ -11,11 +11,15 @@ class ClientViewServicesPage extends StatefulWidget {
 
 class _ClientViewServicesPageState extends State<ClientViewServicesPage> {
   var services = [];
+  bool isLoading = true;
+  bool isServicesEmpty = false;
 
   Future<void> getData() async {
     await db.collection("Gig").get().then((event) {
       setState(() {
         services = event.docs;
+        if (services.isEmpty) isServicesEmpty = true;
+        isLoading = false;
       });
     });
   }
@@ -28,23 +32,35 @@ class _ClientViewServicesPageState extends State<ClientViewServicesPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await getData();
-        },
-        child: ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 10,
-          ),
-          itemCount: services.length,
-          padding: const EdgeInsets.all(10),
-          itemBuilder: (context, index) {
-            return ClientServiceCard(data: services[index]);
-          },
-        ),
-      ),
-    );
+    return isLoading
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : isServicesEmpty
+            ? Container(
+                decoration:
+                    BoxDecoration(color: Theme.of(context).colorScheme.primary),
+                child: const Center(
+                  child: Text("No Service yet"),
+                ),
+              )
+            : Scaffold(
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                body: RefreshIndicator(
+                  onRefresh: () async {
+                    await getData();
+                  },
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
+                    ),
+                    itemCount: services.length,
+                    padding: const EdgeInsets.all(10),
+                    itemBuilder: (context, index) {
+                      return ClientServiceCard(data: services[index]);
+                    },
+                  ),
+                ),
+              );
   }
 }

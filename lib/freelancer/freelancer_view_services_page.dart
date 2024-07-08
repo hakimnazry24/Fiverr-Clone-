@@ -14,6 +14,9 @@ class FreelancerViewServicesPage extends StatefulWidget {
 
 class _ViewServicesPageState extends State<FreelancerViewServicesPage> {
   var services = [];
+  bool isLoading = true;
+  bool isServicesEmpty = false;
+
   Future<void> getData() async {
     await db
         .collection("Gig")
@@ -30,37 +33,48 @@ class _ViewServicesPageState extends State<FreelancerViewServicesPage> {
   void initState() {
     super.initState();
     getData();
+    if (services.isEmpty) isServicesEmpty = true;
+    isLoading = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.primary,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const CreateGigPage()),
+    return isLoading
+        ? Container(
+            decoration:
+                BoxDecoration(color: Theme.of(context).colorScheme.primary),
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            floatingActionButton: FloatingActionButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const CreateGigPage()),
+                );
+                getData();
+              },
+              child: const Icon(Icons.add),
+            ),
+            body: RefreshIndicator(
+              onRefresh: () async {
+                await getData();
+              },
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(
+                  height: 10,
+                ),
+                itemCount: services.length,
+                padding: const EdgeInsets.all(10),
+                itemBuilder: (context, index) {
+                  return FreelancerServiceCard(data: services[index]);
+                },
+              ),
+            ),
           );
-          getData();
-        },
-        child: const Icon(Icons.add),
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          await getData();
-        },
-        child: ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 10,
-          ),
-          itemCount: services.length,
-          padding: const EdgeInsets.all(10),
-          itemBuilder: (context, index) {
-            return FreelancerServiceCard(data: services[index]);
-          },
-        ),
-      ),
-    );
   }
 }
